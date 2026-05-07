@@ -1,0 +1,135 @@
+<h2>Avatar</h2>
+<p class="section-meta">A component for representing the user with a fallback.</p>
+
+<!-- 1. Basic -->
+<preview>
+    <span class="avatar">
+        <img src="https://i.pravatar.cc/150?u=admin" alt="Alex" class="avatar-image"><span class="avatar-fallback">AL</span>
+    </span>
+</preview>
+
+<!-- 2. Badge -->
+<h3>Badge</h3>
+<preview>
+    <span class="avatar">
+        <img src="https://i.pravatar.cc/150?u=cloud" alt="Elena" class="avatar-image"><span class="avatar-fallback">EL</span>
+        <span class="avatar-badge" style="background-color: var(--success, #10b981);"></span>
+    </span>
+    <span class="avatar">
+        <img src="https://i.pravatar.cc/150?u=devops" alt="Marcus" class="avatar-image"><span class="avatar-fallback">MA</span>
+        <span class="avatar-badge" style="background-color: var(--warning, #f59e0b);"></span>
+    </span>
+    <span class="avatar">
+        <span class="avatar-fallback">SR</span>
+        <span class="avatar-badge" style="background-color: var(--destructive, #ef4444);"></span>
+    </span>
+</preview>
+
+<!-- 3. Badge with Icon -->
+<h3>Badge with Icon</h3>
+<preview>
+    <span class="avatar" style="width:2.5rem;height:2.5rem;">
+        <img src="https://i.pravatar.cc/150?u=ai" alt="AI Research" class="avatar-image"><span class="avatar-fallback">AI</span>
+        <span class="avatar-badge" style="background-color: var(--primary);">
+            <i data-lucide="bot" style="stroke-width:3;"></i>
+        </span>
+    </span>
+    <span class="avatar" style="width:2.5rem;height:2.5rem;">
+        <img src="https://i.pravatar.cc/150?u=terminal" alt="Infrastructure" class="avatar-image"><span class="avatar-fallback">IN</span>
+        <span class="avatar-badge" style="background-color: var(--secondary);">
+            <i data-lucide="terminal" style="stroke-width:3;"></i>
+        </span>
+    </span>
+</preview>
+
+<!-- 4. Avatar Group -->
+<h3>Avatar Group</h3>
+<preview>
+    <div class="avatar-group">
+        <span class="avatar">
+            <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="Sophia" class="avatar-image"><span class="avatar-fallback">SO</span>
+        </span>
+        <span class="avatar">
+            <img src="https://i.pravatar.cc/150?u=a04258a2462d826712d" alt="Elena" class="avatar-image">
+            <span class="avatar-fallback">EL</span>
+        </span>
+        <span class="avatar">
+            <img src="https://i.pravatar.cc/150?u=a042581f4e29026024d" alt="Marcus" class="avatar-image">
+            <span class="avatar-fallback">MA</span>
+        </span>
+        <span class="avatar">
+            <span class="avatar-fallback">OP</span>
+        </span>
+    </div>
+</preview>
+
+<!-- 5. Avatar Group Count -->
+<h3>Avatar Group Count</h3>
+<preview>
+    <div class="avatar-group">
+        <span class="avatar">
+            <img src="https://i.pravatar.cc/150?u=1" alt="Designer" class="avatar-image"><span class="avatar-fallback">D1</span>
+        </span>
+        <span class="avatar">
+            <img src="https://i.pravatar.cc/150?u=2" alt="Reviewer" class="avatar-image">
+            <span class="avatar-fallback">R1</span>
+        </span>
+        <div class="avatar-group-count">+12</div>
+    </div>
+</preview>
+
+<!-- 6. Avatar Group with Icon -->
+<h3>Avatar Group with Icon</h3>
+<preview>
+    <div class="avatar-group">
+        <span class="avatar">
+            <img src="https://i.pravatar.cc/150?u=root" alt="Root" class="avatar-image"><span class="avatar-fallback">RT</span>
+        </span>
+        <span class="avatar">
+            <img src="https://i.pravatar.cc/150?u=guest" alt="Guest" class="avatar-image"><span class="avatar-fallback">GS</span>
+        </span>
+        <div class="avatar-group-count" style="cursor: pointer;" title="Add node">
+            <i data-lucide="plus-circle"></i>
+        </div>
+    </div>
+</preview>
+
+<!-- 7. Sizes -->
+<h3>Sizes</h3>
+<preview>
+    <span class="avatar" style="width:1.5rem;height:1.5rem;">
+        <img src="https://i.pravatar.cc/150?u=5" alt="Mini" class="avatar-image"><span class="avatar-fallback">MN</span>
+    </span>
+    <span class="avatar">
+        <img src="https://i.pravatar.cc/150?u=5" alt="Standard" class="avatar-image"><span class="avatar-fallback">ST</span>
+    </span>
+    <span class="avatar" style="width:3rem;height:3rem;">
+        <img src="https://i.pravatar.cc/150?u=5" alt="Large" class="avatar-image"><span class="avatar-fallback">LG</span>
+    </span>
+    <span class="avatar" style="width:4rem;height:4rem;">
+        <img src="https://i.pravatar.cc/150?u=5" alt="Extra Large" class="avatar-image"><span class="avatar-fallback">XL</span>
+    </span>
+</preview>
+
+<!-- 8. Dropdown -->
+<h3>Dropdown</h3>
+<p class="section-meta">Avatar can be used as a trigger for a dropdown menu.</p>
+<preview>
+    <button aria-haspopup="menu" popovertarget="avatar-dropdown" class="avatar" style="anchor-name:--avatar-dropdown; border: none; padding: 0; background: transparent; cursor: pointer;">
+        <img src="https://i.pravatar.cc/150?u=admin" alt="Alex" class="avatar-image"><span class="avatar-fallback">AL</span>
+    </button>
+    <menu id="avatar-dropdown" popover class="dropdown" data-placement="bottom-start" role="menu" style="position-anchor:--avatar-dropdown; width: 14rem;">
+        <div class="menu-label" style="display: flex; flex-direction: column;">
+        <div class="menu-label" style="display: flex; flex-direction: column;">
+            <span style="font-weight:600;color:var(--foreground);">Alex</span>
+            <span style="font-weight:normal;font-size:0.75rem;">alex@example.com</span>
+        </div>
+        </div>
+        <div class="menu-separator"></div>
+        <button class="menu-item" role="menuitem"><i data-lucide="user"></i> Profile <span class="shortcut">⌘P</span></button>
+        <button class="menu-item" role="menuitem"><i data-lucide="settings"></i> Settings</button>
+        <button class="menu-item" role="menuitem"><i data-lucide="bell"></i> Notifications <span class="shortcut">⌘N</span></button>
+        <div class="menu-separator"></div>
+        <button class="menu-item" role="menuitem" style="color: var(--destructive);"><i data-lucide="log-out"></i> Log out</button>
+    </menu>
+</preview>

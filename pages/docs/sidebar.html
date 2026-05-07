@@ -1,0 +1,1136 @@
+<h2>Sidebar</h2>
+<p class="section-meta">Responsive, collapsible application sidebar with rail mode, nested navigation, and visibility control.</p>
+<style>
+  /* Showcase-only: User profile footer button */
+  .sidebar-footer-user {
+    justify-content: flex-start;
+    align-items: center;
+    height: 3.25rem;
+    padding: 0.5rem;
+    gap: 0.75rem;
+  }
+  .sidebar-footer-user .avatar {
+    width: 1.75rem;
+    height: 1.75rem;
+    border: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+  .footer-user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1.2;
+    overflow: hidden;
+  }
+  .user-name { font-weight: 600; font-size: 0.8125rem; color: var(--foreground); white-space: nowrap; }
+  .user-role { font-size: 0.6875rem; color: var(--muted-foreground); white-space: nowrap; }
+  .sidebar-footer-user .chevron {
+    margin-left: auto;
+    width: 14px;
+    height: 14px;
+    opacity: 0.5;
+    flex-shrink: 0;
+  }
+  /* Rail mode: shrink custom footer button to an icon size and center the avatar */
+  .sidebar-provider[data-state="closed"] .sidebar[data-collapsible="icon"] .sidebar-footer-user {
+    padding: 0;
+    width: 2rem;
+    height: 2rem;
+    gap: 0;
+    justify-content: center;
+  }
+  
+  /* Rail mode: properly hide custom text content without using !important */
+  .sidebar-provider[data-state="closed"] .sidebar[data-collapsible="icon"] .footer-user-info,
+  .sidebar-provider[data-state="closed"] .sidebar[data-collapsible="icon"] .sidebar-footer-user .chevron {
+    display: none;
+  }
+</style>
+
+<h2>Default Sidebar</h2>
+<hr style="margin: 1rem 0; border: 0; border-top: 1px solid var(--border);" />
+
+<h3>Offcanvas Mode</h3>
+<p class="section-meta">Disappears completely when collapsed.</p>
+<preview>
+    <div class="sidebar-provider" data-state="open" style="height: 460px; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden;">
+      <aside class="sidebar" id="sidebar-default-offcanvas" role="navigation" data-collapsible="offcanvas">
+        <header class="sidebar-header">
+          <span class="sidebar-expanded-only" style="font-weight: 700; font-size: 1.1rem; letter-spacing: -0.02em;">Acme Corp</span>
+          <i data-lucide="command" class="sidebar-collapsed-only" style="width: 1.4rem; height: 1.4rem; color: var(--primary);"></i>
+        </header>
+
+        <nav class="sidebar-content">
+          <div class="sidebar-group-label"><span class="sidebar-expanded-only">Platform</span></div>
+          <ul class="sidebar-menu">
+            <li>
+              <a href="javascript:void(0)" class="sidebar-menu-button active" title="Dashboard">
+                <i data-lucide="layout-dashboard"></i>
+                <span class="sidebar-expanded-only">Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" class="sidebar-menu-button" title="Inbox">
+                <i data-lucide="inbox"></i>
+                <span class="sidebar-expanded-only">Inbox</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" class="sidebar-menu-button" title="Analytics">
+                <i data-lucide="bar-chart-2"></i>
+                <span class="sidebar-expanded-only">Analytics</span>
+              </a>
+            </li>
+            <li>
+              <details class="sidebar-group" open>
+                <summary class="sidebar-menu-button" title="Projects">
+                  <div class="summary-content">
+                    <i data-lucide="folder" class="sidebar-collapsed-only"></i>
+                    <i data-lucide="folder-open" class="sidebar-expanded-only"></i>
+                  </div>
+                  <span class="sidebar-expanded-only">Projects</span>
+                </summary>
+                <ul class="sidebar-menu sidebar-menu-sub">
+                  <li><a href="javascript:void(0)" class="sidebar-menu-button"><span class="sidebar-expanded-only">Frontend</span></a></li>
+                  <li><a href="javascript:void(0)" class="sidebar-menu-button"><span class="sidebar-expanded-only">Backend</span></a></li>
+                </ul>
+              </details>
+            </li>
+            <li>
+              <a href="javascript:void(0)" class="sidebar-menu-button" title="Settings">
+                <i data-lucide="settings"></i>
+                <span class="sidebar-expanded-only">Settings</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <footer class="sidebar-footer">
+          <button aria-haspopup="menu" popovertarget="sidebar-footer-menu-sidebar-default-offcanvas" class="btn btn-ghost sidebar-footer-user" style="anchor-name: --sidebar-footer-sidebar-default-offcanvas-anchor;" title="Profile">
+            <span class="avatar">
+              <img src="https://i.pravatar.cc/80" alt="Alex" class="avatar-image"><span class="avatar-fallback">AL</span>
+            </span>
+            <div class="sidebar-expanded-only footer-user-info">
+              <span class="user-name">Alex</span>
+              <span class="user-role">Admin</span>
+            </div>
+            <i data-lucide="chevron-up" class="sidebar-expanded-only chevron"></i>
+          </button>
+
+          <menu id="sidebar-footer-menu-sidebar-default-offcanvas" popover class="dropdown" data-placement="top-start" role="menu" style="position-anchor: --sidebar-footer-sidebar-default-offcanvas-anchor; width: anchor-size(width);">
+            <div class="menu-label">My Account</div>
+            <button class="menu-item" role="menuitem"><i data-lucide="user"></i>Profile</button>
+            <div class="menu-separator"></div>
+            <button class="menu-item menu-item-destructive" role="menuitem"><i data-lucide="log-out"></i>Log out</button>
+          </menu>
+        </footer>
+      </aside>
+
+      <div class="sidebar-inset">
+        <header class="topnav">
+          <button class="btn btn-ghost btn-icon-sm sidebar-trigger" aria-label="Toggle Sidebar"><i data-lucide="panel-left" style="stroke-width: 1.5;"></i></button>
+          <span style="font-size: 0.875rem; font-weight: 500;">Dashboard</span>
+        </header>
+        <main>
+          <div style="padding: 1.5rem;">
+            <p style="color: var(--muted-foreground); font-size: 0.875rem;">Main content area.</p>
+          </div>
+        </main>
+      </div>
+    </div>
+</preview>
+
+<h3>Icon Rail Mode</h3>
+<p class="section-meta">Shrinks to an icon-only rail.</p>
+<preview>
+    <div class="sidebar-provider" data-state="open" style="height: 460px; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden;">
+      <aside class="sidebar" id="sidebar-default-icon" role="navigation" data-collapsible="icon">
+        <header class="sidebar-header">
+          <span class="sidebar-expanded-only" style="font-weight: 700; font-size: 1.1rem; letter-spacing: -0.02em;">Acme Corp</span>
+          <i data-lucide="command" class="sidebar-collapsed-only" style="width: 1.4rem; height: 1.4rem; color: var(--primary);"></i>
+        </header>
+
+        <nav class="sidebar-content">
+          <div class="sidebar-group-label"><span class="sidebar-expanded-only">Platform</span></div>
+          <ul class="sidebar-menu">
+            <li>
+              <a href="javascript:void(0)" class="sidebar-menu-button active" title="Dashboard">
+                <i data-lucide="layout-dashboard"></i>
+                <span class="sidebar-expanded-only">Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" class="sidebar-menu-button" title="Inbox">
+                <i data-lucide="inbox"></i>
+                <span class="sidebar-expanded-only">Inbox</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" class="sidebar-menu-button" title="Analytics">
+                <i data-lucide="bar-chart-2"></i>
+                <span class="sidebar-expanded-only">Analytics</span>
+              </a>
+            </li>
+            <li>
+              <details class="sidebar-group" open>
+                <summary class="sidebar-menu-button" title="Projects">
+                  <div class="summary-content">
+                    <i data-lucide="folder" class="sidebar-collapsed-only"></i>
+                    <i data-lucide="folder-open" class="sidebar-expanded-only"></i>
+                  </div>
+                  <span class="sidebar-expanded-only">Projects</span>
+                </summary>
+                <ul class="sidebar-menu sidebar-menu-sub">
+                  <li><a href="javascript:void(0)" class="sidebar-menu-button"><span class="sidebar-expanded-only">Frontend</span></a></li>
+                  <li><a href="javascript:void(0)" class="sidebar-menu-button"><span class="sidebar-expanded-only">Backend</span></a></li>
+                </ul>
+              </details>
+            </li>
+            <li>
+              <a href="javascript:void(0)" class="sidebar-menu-button" title="Settings">
+                <i data-lucide="settings"></i>
+                <span class="sidebar-expanded-only">Settings</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <footer class="sidebar-footer">
+          <button aria-haspopup="menu" popovertarget="sidebar-footer-menu-sidebar-default-icon" class="btn btn-ghost sidebar-footer-user" style="anchor-name: --sidebar-footer-sidebar-default-icon-anchor;" title="Profile">
+            <span class="avatar">
+              <img src="https://i.pravatar.cc/80" alt="Alex" class="avatar-image"><span class="avatar-fallback">AL</span>
+            </span>
+            <div class="sidebar-expanded-only footer-user-info">
+              <span class="user-name">Alex</span>
+              <span class="user-role">Admin</span>
+            </div>
+            <i data-lucide="chevron-up" class="sidebar-expanded-only chevron"></i>
+          </button>
+
+          <menu id="sidebar-footer-menu-sidebar-default-icon" popover class="dropdown" data-placement="top-start" role="menu" style="position-anchor: --sidebar-footer-sidebar-default-icon-anchor; width: anchor-size(width);">
+            <div class="menu-label">My Account</div>
+            <button class="menu-item" role="menuitem"><i data-lucide="user"></i>Profile</button>
+            <div class="menu-separator"></div>
+            <button class="menu-item menu-item-destructive" role="menuitem"><i data-lucide="log-out"></i>Log out</button>
+          </menu>
+        </footer>
+      </aside>
+
+      <div class="sidebar-inset">
+        <header class="topnav">
+          <button class="btn btn-ghost btn-icon-sm sidebar-trigger" aria-label="Toggle Sidebar"><i data-lucide="arrow-left-to-line" class="sidebar-expanded-only" style="stroke-width: 1.5;"></i><i data-lucide="panel-left" class="sidebar-collapsed-only" style="stroke-width: 1.5;"></i></button>
+          <span style="font-size: 0.875rem; font-weight: 500;">Dashboard</span>
+        </header>
+        <main>
+          <div style="padding: 1.5rem;">
+            <p style="color: var(--muted-foreground); font-size: 0.875rem;">Main content area.</p>
+          </div>
+        </main>
+      </div>
+    </div>
+</preview>
+
+<h3>Always Open</h3>
+<p class="section-meta">Cannot be collapsed.</p>
+<preview>
+    <div class="sidebar-provider" data-state="open" style="height: 460px; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden;">
+      <aside class="sidebar" id="sidebar-default-none" role="navigation" data-collapsible="none">
+        <header class="sidebar-header">
+          <span class="sidebar-expanded-only" style="font-weight: 700; font-size: 1.1rem; letter-spacing: -0.02em;">Acme Corp</span>
+          <i data-lucide="command" class="sidebar-collapsed-only" style="width: 1.4rem; height: 1.4rem; color: var(--primary);"></i>
+        </header>
+
+        <nav class="sidebar-content">
+          <div class="sidebar-group-label"><span class="sidebar-expanded-only">Platform</span></div>
+          <ul class="sidebar-menu">
+            <li>
+              <a href="javascript:void(0)" class="sidebar-menu-button active" title="Dashboard">
+                <i data-lucide="layout-dashboard"></i>
+                <span class="sidebar-expanded-only">Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" class="sidebar-menu-button" title="Inbox">
+                <i data-lucide="inbox"></i>
+                <span class="sidebar-expanded-only">Inbox</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" class="sidebar-menu-button" title="Analytics">
+                <i data-lucide="bar-chart-2"></i>
+                <span class="sidebar-expanded-only">Analytics</span>
+              </a>
+            </li>
+            <li>
+              <details class="sidebar-group" open>
+                <summary class="sidebar-menu-button" title="Projects">
+                  <div class="summary-content">
+                    <i data-lucide="folder" class="sidebar-collapsed-only"></i>
+                    <i data-lucide="folder-open" class="sidebar-expanded-only"></i>
+                  </div>
+                  <span class="sidebar-expanded-only">Projects</span>
+                </summary>
+                <ul class="sidebar-menu sidebar-menu-sub">
+                  <li><a href="javascript:void(0)" class="sidebar-menu-button"><span class="sidebar-expanded-only">Frontend</span></a></li>
+                  <li><a href="javascript:void(0)" class="sidebar-menu-button"><span class="sidebar-expanded-only">Backend</span></a></li>
+                </ul>
+              </details>
+            </li>
+            <li>
+              <a href="javascript:void(0)" class="sidebar-menu-button" title="Settings">
+                <i data-lucide="settings"></i>
+                <span class="sidebar-expanded-only">Settings</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <footer class="sidebar-footer">
+          <button aria-haspopup="menu" popovertarget="sidebar-footer-menu-sidebar-default-none" class="btn btn-ghost sidebar-footer-user" style="anchor-name: --sidebar-footer-sidebar-default-none-anchor;" title="Profile">
+            <span class="avatar">
+              <img src="https://i.pravatar.cc/80" alt="Alex" class="avatar-image"><span class="avatar-fallback">AL</span>
+            </span>
+            <div class="sidebar-expanded-only footer-user-info">
+              <span class="user-name">Alex</span>
+              <span class="user-role">Admin</span>
+            </div>
+            <i data-lucide="chevron-up" class="sidebar-expanded-only chevron"></i>
+          </button>
+
+          <menu id="sidebar-footer-menu-sidebar-default-none" popover class="dropdown" data-placement="top-start" role="menu" style="position-anchor: --sidebar-footer-sidebar-default-none-anchor; width: anchor-size(width);">
+            <div class="menu-label">My Account</div>
+            <button class="menu-item" role="menuitem"><i data-lucide="user"></i>Profile</button>
+            <div class="menu-separator"></div>
+            <button class="menu-item menu-item-destructive" role="menuitem"><i data-lucide="log-out"></i>Log out</button>
+          </menu>
+        </footer>
+      </aside>
+
+      <div class="sidebar-inset">
+        <header class="topnav">
+          <span style="font-size: 0.875rem; font-weight: 500;">Console</span>
+        </header>
+        <main>
+          <div style="padding: 1.5rem;">
+            <p style="color: var(--muted-foreground); font-size: 0.875rem;">Main content area.</p>
+          </div>
+        </main>
+      </div>
+    </div>
+</preview>
+
+<h2>Inset Variant</h2>
+<hr style="margin: 1rem 0; border: 0; border-top: 1px solid var(--border);" />
+
+<h3>Offcanvas Mode</h3>
+<p class="section-meta">Disappears completely when collapsed.</p>
+<preview>
+    <div class="sidebar-provider" data-state="open" style="height: 460px; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden;">
+      <aside class="sidebar" id="sidebar-inset-offcanvas" role="navigation" data-variant="inset" data-collapsible="offcanvas">
+        <header class="sidebar-header">
+          <span class="sidebar-expanded-only" style="font-weight: 700; font-size: 1.1rem; letter-spacing: -0.02em;">Acme Corp</span>
+          <i data-lucide="command" class="sidebar-collapsed-only" style="width: 1.4rem; height: 1.4rem; color: var(--primary);"></i>
+        </header>
+
+        <nav class="sidebar-content">
+          <div class="sidebar-group-label"><span class="sidebar-expanded-only">Platform</span></div>
+          <ul class="sidebar-menu">
+            <li>
+              <a href="javascript:void(0)" class="sidebar-menu-button active" title="Dashboard">
+                <i data-lucide="layout-dashboard"></i>
+                <span class="sidebar-expanded-only">Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" class="sidebar-menu-button" title="Inbox">
+                <i data-lucide="inbox"></i>
+                <span class="sidebar-expanded-only">Inbox</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" class="sidebar-menu-button" title="Analytics">
+                <i data-lucide="bar-chart-2"></i>
+                <span class="sidebar-expanded-only">Analytics</span>
+              </a>
+            </li>
+            <li>
+              <details class="sidebar-group" open>
+                <summary class="sidebar-menu-button" title="Projects">
+                  <div class="summary-content">
+                    <i data-lucide="folder" class="sidebar-collapsed-only"></i>
+                    <i data-lucide="folder-open" class="sidebar-expanded-only"></i>
+                  </div>
+                  <span class="sidebar-expanded-only">Projects</span>
+                </summary>
+                <ul class="sidebar-menu sidebar-menu-sub">
+                  <li><a href="javascript:void(0)" class="sidebar-menu-button"><span class="sidebar-expanded-only">Frontend</span></a></li>
+                  <li><a href="javascript:void(0)" class="sidebar-menu-button"><span class="sidebar-expanded-only">Backend</span></a></li>
+                </ul>
+              </details>
+            </li>
+            <li>
+              <a href="javascript:void(0)" class="sidebar-menu-button" title="Settings">
+                <i data-lucide="settings"></i>
+                <span class="sidebar-expanded-only">Settings</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <footer class="sidebar-footer">
+          <button aria-haspopup="menu" popovertarget="sidebar-footer-menu-sidebar-inset-offcanvas" class="btn btn-ghost sidebar-footer-user" style="anchor-name: --sidebar-footer-sidebar-inset-offcanvas-anchor;" title="Profile">
+            <span class="avatar">
+              <img src="https://i.pravatar.cc/80" alt="Alex" class="avatar-image"><span class="avatar-fallback">AL</span>
+            </span>
+            <div class="sidebar-expanded-only footer-user-info">
+              <span class="user-name">Alex</span>
+              <span class="user-role">Admin</span>
+            </div>
+            <i data-lucide="chevron-up" class="sidebar-expanded-only chevron"></i>
+          </button>
+
+          <menu id="sidebar-footer-menu-sidebar-inset-offcanvas" popover class="dropdown" data-placement="top-start" role="menu" style="position-anchor: --sidebar-footer-sidebar-inset-offcanvas-anchor; width: anchor-size(width);">
+            <div class="menu-label">My Account</div>
+            <button class="menu-item" role="menuitem"><i data-lucide="user"></i>Profile</button>
+            <div class="menu-separator"></div>
+            <button class="menu-item menu-item-destructive" role="menuitem"><i data-lucide="log-out"></i>Log out</button>
+          </menu>
+        </footer>
+      </aside>
+
+      <div class="sidebar-inset">
+        <header class="topnav">
+          <button class="btn btn-ghost btn-icon-sm sidebar-trigger" aria-label="Toggle Sidebar" aria-controls="sidebar-inset-offcanvas"><i data-lucide="panel-left" style="stroke-width: 1.5;"></i></button>
+          <span style="font-size: 0.875rem; font-weight: 500;">Console</span>
+        </header>
+        <main>
+          <div style="padding: 1.5rem;">
+            <p style="color: var(--muted-foreground); font-size: 0.875rem;">Main content area.</p>
+          </div>
+        </main>
+      </div>
+    </div>
+</preview>
+
+<h3>Icon Rail Mode</h3>
+<p class="section-meta">Shrinks to an icon-only rail.</p>
+<preview>
+    <div class="sidebar-provider" data-state="open" style="height: 460px; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden;">
+      <aside class="sidebar" id="sidebar-inset-icon" role="navigation" data-variant="inset" data-collapsible="icon">
+        <header class="sidebar-header">
+          <span class="sidebar-expanded-only" style="font-weight: 700; font-size: 1.1rem; letter-spacing: -0.02em;">Acme Corp</span>
+          <i data-lucide="command" class="sidebar-collapsed-only" style="width: 1.4rem; height: 1.4rem; color: var(--primary);"></i>
+        </header>
+
+        <nav class="sidebar-content">
+          <div class="sidebar-group-label"><span class="sidebar-expanded-only">Platform</span></div>
+          <ul class="sidebar-menu">
+            <li>
+              <a href="javascript:void(0)" class="sidebar-menu-button active" title="Dashboard">
+                <i data-lucide="layout-dashboard"></i>
+                <span class="sidebar-expanded-only">Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" class="sidebar-menu-button" title="Inbox">
+                <i data-lucide="inbox"></i>
+                <span class="sidebar-expanded-only">Inbox</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" class="sidebar-menu-button" title="Analytics">
+                <i data-lucide="bar-chart-2"></i>
+                <span class="sidebar-expanded-only">Analytics</span>
+              </a>
+            </li>
+            <li>
+              <details class="sidebar-group" open>
+                <summary class="sidebar-menu-button" title="Projects">
+                  <div class="summary-content">
+                    <i data-lucide="folder" class="sidebar-collapsed-only"></i>
+                    <i data-lucide="folder-open" class="sidebar-expanded-only"></i>
+                  </div>
+                  <span class="sidebar-expanded-only">Projects</span>
+                </summary>
+                <ul class="sidebar-menu sidebar-menu-sub">
+                  <li><a href="javascript:void(0)" class="sidebar-menu-button"><span class="sidebar-expanded-only">Frontend</span></a></li>
+                  <li><a href="javascript:void(0)" class="sidebar-menu-button"><span class="sidebar-expanded-only">Backend</span></a></li>
+                </ul>
+              </details>
+            </li>
+            <li>
+              <a href="javascript:void(0)" class="sidebar-menu-button" title="Settings">
+                <i data-lucide="settings"></i>
+                <span class="sidebar-expanded-only">Settings</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <footer class="sidebar-footer">
+          <button aria-haspopup="menu" popovertarget="sidebar-footer-menu-sidebar-inset-icon" class="btn btn-ghost sidebar-footer-user" style="anchor-name: --sidebar-footer-sidebar-inset-icon-anchor;" title="Profile">
+            <span class="avatar">
+              <img src="https://i.pravatar.cc/80" alt="Alex" class="avatar-image"><span class="avatar-fallback">AL</span>
+            </span>
+            <div class="sidebar-expanded-only footer-user-info">
+              <span class="user-name">Alex</span>
+              <span class="user-role">Admin</span>
+            </div>
+            <i data-lucide="chevron-up" class="sidebar-expanded-only chevron"></i>
+          </button>
+
+          <menu id="sidebar-footer-menu-sidebar-inset-icon" popover class="dropdown" data-placement="top-start" role="menu" style="position-anchor: --sidebar-footer-sidebar-inset-icon-anchor; width: anchor-size(width);">
+            <div class="menu-label">My Account</div>
+            <button class="menu-item" role="menuitem"><i data-lucide="user"></i>Profile</button>
+            <div class="menu-separator"></div>
+            <button class="menu-item menu-item-destructive" role="menuitem"><i data-lucide="log-out"></i>Log out</button>
+          </menu>
+        </footer>
+      </aside>
+
+      <div class="sidebar-inset">
+        <header class="topnav">
+          <button class="btn btn-ghost btn-icon-sm sidebar-trigger" aria-label="Toggle Sidebar" aria-controls="sidebar-inset-icon"><i data-lucide="arrow-left-to-line" class="sidebar-expanded-only" style="stroke-width: 1.5;"></i><i data-lucide="panel-left" class="sidebar-collapsed-only" style="stroke-width: 1.5;"></i></button>
+          <span style="font-size: 0.875rem; font-weight: 500;">Console</span>
+        </header>
+        <main>
+          <div style="padding: 1.5rem;">
+            <p style="color: var(--muted-foreground); font-size: 0.875rem;">Main content area.</p>
+          </div>
+        </main>
+      </div>
+    </div>
+</preview>
+
+<h3>Always Open</h3>
+<p class="section-meta">Cannot be collapsed.</p>
+<preview>
+    <div class="sidebar-provider" data-state="open" style="height: 460px; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden;">
+      <aside class="sidebar" id="sidebar-inset-none" role="navigation" data-variant="inset" data-collapsible="none">
+        <header class="sidebar-header">
+          <span class="sidebar-expanded-only" style="font-weight: 700; font-size: 1.1rem; letter-spacing: -0.02em;">Acme Corp</span>
+          <i data-lucide="command" class="sidebar-collapsed-only" style="width: 1.4rem; height: 1.4rem; color: var(--primary);"></i>
+        </header>
+
+        <nav class="sidebar-content">
+          <div class="sidebar-group-label"><span class="sidebar-expanded-only">Platform</span></div>
+          <ul class="sidebar-menu">
+            <li>
+              <a href="javascript:void(0)" class="sidebar-menu-button active" title="Dashboard">
+                <i data-lucide="layout-dashboard"></i>
+                <span class="sidebar-expanded-only">Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" class="sidebar-menu-button" title="Inbox">
+                <i data-lucide="inbox"></i>
+                <span class="sidebar-expanded-only">Inbox</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" class="sidebar-menu-button" title="Analytics">
+                <i data-lucide="bar-chart-2"></i>
+                <span class="sidebar-expanded-only">Analytics</span>
+              </a>
+            </li>
+            <li>
+              <details class="sidebar-group" open>
+                <summary class="sidebar-menu-button" title="Projects">
+                  <div class="summary-content">
+                    <i data-lucide="folder" class="sidebar-collapsed-only"></i>
+                    <i data-lucide="folder-open" class="sidebar-expanded-only"></i>
+                  </div>
+                  <span class="sidebar-expanded-only">Projects</span>
+                </summary>
+                <ul class="sidebar-menu sidebar-menu-sub">
+                  <li><a href="javascript:void(0)" class="sidebar-menu-button"><span class="sidebar-expanded-only">Frontend</span></a></li>
+                  <li><a href="javascript:void(0)" class="sidebar-menu-button"><span class="sidebar-expanded-only">Backend</span></a></li>
+                </ul>
+              </details>
+            </li>
+            <li>
+              <a href="javascript:void(0)" class="sidebar-menu-button" title="Settings">
+                <i data-lucide="settings"></i>
+                <span class="sidebar-expanded-only">Settings</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <footer class="sidebar-footer">
+          <button aria-haspopup="menu" popovertarget="sidebar-footer-menu-sidebar-inset-none" class="btn btn-ghost sidebar-footer-user" style="anchor-name: --sidebar-footer-sidebar-inset-none-anchor;" title="Profile">
+            <span class="avatar">
+              <img src="https://i.pravatar.cc/80" alt="Alex" class="avatar-image"><span class="avatar-fallback">AL</span>
+            </span>
+            <div class="sidebar-expanded-only footer-user-info">
+              <span class="user-name">Alex</span>
+              <span class="user-role">Admin</span>
+            </div>
+            <i data-lucide="chevron-up" class="sidebar-expanded-only chevron"></i>
+          </button>
+
+          <menu id="sidebar-footer-menu-sidebar-inset-none" popover class="dropdown" data-placement="top-start" role="menu" style="position-anchor: --sidebar-footer-sidebar-inset-none-anchor; width: anchor-size(width);">
+            <div class="menu-label">My Account</div>
+            <button class="menu-item" role="menuitem"><i data-lucide="user"></i>Profile</button>
+            <div class="menu-separator"></div>
+            <button class="menu-item menu-item-destructive" role="menuitem"><i data-lucide="log-out"></i>Log out</button>
+          </menu>
+        </footer>
+      </aside>
+
+      <div class="sidebar-inset">
+        <header class="topnav">
+          <span style="font-size: 0.875rem; font-weight: 500;">Console</span>
+        </header>
+        <main>
+          <div style="padding: 1.5rem;">
+            <p style="color: var(--muted-foreground); font-size: 0.875rem;">Main content area.</p>
+          </div>
+        </main>
+      </div>
+    </div>
+</preview>
+
+<h2>Floating Variant</h2>
+<hr style="margin: 1rem 0; border: 0; border-top: 1px solid var(--border);" />
+
+<h3>Offcanvas Mode</h3>
+<p class="section-meta">Disappears completely when collapsed.</p>
+<preview>
+    <div class="sidebar-provider" data-state="open" style="height: 460px; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden;">
+      <aside class="sidebar" id="sidebar-floating-offcanvas" role="navigation" data-variant="floating" data-collapsible="offcanvas">
+        <header class="sidebar-header">
+          <span class="sidebar-expanded-only" style="font-weight: 700; font-size: 1.1rem; letter-spacing: -0.02em;">Acme Corp</span>
+          <i data-lucide="command" class="sidebar-collapsed-only" style="width: 1.4rem; height: 1.4rem; color: var(--primary);"></i>
+        </header>
+
+        <nav class="sidebar-content">
+          <div class="sidebar-group-label"><span class="sidebar-expanded-only">Platform</span></div>
+          <ul class="sidebar-menu">
+            <li>
+              <a href="javascript:void(0)" class="sidebar-menu-button active" title="Dashboard">
+                <i data-lucide="layout-dashboard"></i>
+                <span class="sidebar-expanded-only">Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" class="sidebar-menu-button" title="Inbox">
+                <i data-lucide="inbox"></i>
+                <span class="sidebar-expanded-only">Inbox</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" class="sidebar-menu-button" title="Analytics">
+                <i data-lucide="bar-chart-2"></i>
+                <span class="sidebar-expanded-only">Analytics</span>
+              </a>
+            </li>
+            <li>
+              <details class="sidebar-group" open>
+                <summary class="sidebar-menu-button" title="Projects">
+                  <div class="summary-content">
+                    <i data-lucide="folder" class="sidebar-collapsed-only"></i>
+                    <i data-lucide="folder-open" class="sidebar-expanded-only"></i>
+                  </div>
+                  <span class="sidebar-expanded-only">Projects</span>
+                </summary>
+                <ul class="sidebar-menu sidebar-menu-sub">
+                  <li><a href="javascript:void(0)" class="sidebar-menu-button"><span class="sidebar-expanded-only">Frontend</span></a></li>
+                  <li><a href="javascript:void(0)" class="sidebar-menu-button"><span class="sidebar-expanded-only">Backend</span></a></li>
+                </ul>
+              </details>
+            </li>
+            <li>
+              <a href="javascript:void(0)" class="sidebar-menu-button" title="Settings">
+                <i data-lucide="settings"></i>
+                <span class="sidebar-expanded-only">Settings</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <footer class="sidebar-footer">
+          <button aria-haspopup="menu" popovertarget="sidebar-footer-menu-sidebar-floating-offcanvas" class="btn btn-ghost sidebar-footer-user" style="anchor-name: --sidebar-footer-sidebar-floating-offcanvas-anchor;" title="Profile">
+            <span class="avatar">
+              <img src="https://i.pravatar.cc/80" alt="Alex" class="avatar-image"><span class="avatar-fallback">AL</span>
+            </span>
+            <div class="sidebar-expanded-only footer-user-info">
+              <span class="user-name">Alex</span>
+              <span class="user-role">Admin</span>
+            </div>
+            <i data-lucide="chevron-up" class="sidebar-expanded-only chevron"></i>
+          </button>
+
+          <menu id="sidebar-footer-menu-sidebar-floating-offcanvas" popover class="dropdown" data-placement="top-start" role="menu" style="position-anchor: --sidebar-footer-sidebar-floating-offcanvas-anchor; width: anchor-size(width);">
+            <div class="menu-label">My Account</div>
+            <button class="menu-item" role="menuitem"><i data-lucide="user"></i>Profile</button>
+            <div class="menu-separator"></div>
+            <button class="menu-item menu-item-destructive" role="menuitem"><i data-lucide="log-out"></i>Log out</button>
+          </menu>
+        </footer>
+      </aside>
+
+      <div class="sidebar-inset">
+        <header class="topnav">
+          <button class="btn btn-ghost btn-icon-sm sidebar-trigger" aria-label="Toggle Sidebar" aria-controls="sidebar-floating-offcanvas"><i data-lucide="panel-left" style="stroke-width: 1.5;"></i></button>
+          <span style="font-size: 0.875rem; font-weight: 500;">Console</span>
+        </header>
+        <main>
+          <div style="padding: 1.5rem;">
+            <p style="color: var(--muted-foreground); font-size: 0.875rem;">Main content area.</p>
+          </div>
+        </main>
+      </div>
+    </div>
+</preview>
+
+<h3>Icon Rail Mode</h3>
+<p class="section-meta">Shrinks to an icon-only rail.</p>
+<preview>
+    <div class="sidebar-provider" data-state="open" style="height: 460px; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden;">
+      <aside class="sidebar" id="sidebar-floating-icon" role="navigation" data-variant="floating" data-collapsible="icon">
+        <header class="sidebar-header">
+          <span class="sidebar-expanded-only" style="font-weight: 700; font-size: 1.1rem; letter-spacing: -0.02em;">Acme Corp</span>
+          <i data-lucide="command" class="sidebar-collapsed-only" style="width: 1.4rem; height: 1.4rem; color: var(--primary);"></i>
+        </header>
+
+        <nav class="sidebar-content">
+          <div class="sidebar-group-label"><span class="sidebar-expanded-only">Platform</span></div>
+          <ul class="sidebar-menu">
+            <li>
+              <a href="javascript:void(0)" class="sidebar-menu-button active" title="Dashboard">
+                <i data-lucide="layout-dashboard"></i>
+                <span class="sidebar-expanded-only">Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" class="sidebar-menu-button" title="Inbox">
+                <i data-lucide="inbox"></i>
+                <span class="sidebar-expanded-only">Inbox</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" class="sidebar-menu-button" title="Analytics">
+                <i data-lucide="bar-chart-2"></i>
+                <span class="sidebar-expanded-only">Analytics</span>
+              </a>
+            </li>
+            <li>
+              <details class="sidebar-group" open>
+                <summary class="sidebar-menu-button" title="Projects">
+                  <div class="summary-content">
+                    <i data-lucide="folder" class="sidebar-collapsed-only"></i>
+                    <i data-lucide="folder-open" class="sidebar-expanded-only"></i>
+                  </div>
+                  <span class="sidebar-expanded-only">Projects</span>
+                </summary>
+                <ul class="sidebar-menu sidebar-menu-sub">
+                  <li><a href="javascript:void(0)" class="sidebar-menu-button"><span class="sidebar-expanded-only">Frontend</span></a></li>
+                  <li><a href="javascript:void(0)" class="sidebar-menu-button"><span class="sidebar-expanded-only">Backend</span></a></li>
+                </ul>
+              </details>
+            </li>
+            <li>
+              <a href="javascript:void(0)" class="sidebar-menu-button" title="Settings">
+                <i data-lucide="settings"></i>
+                <span class="sidebar-expanded-only">Settings</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <footer class="sidebar-footer">
+          <button aria-haspopup="menu" popovertarget="sidebar-footer-menu-sidebar-floating-icon" class="btn btn-ghost sidebar-footer-user" style="anchor-name: --sidebar-footer-sidebar-floating-icon-anchor;" title="Profile">
+            <span class="avatar">
+              <img src="https://i.pravatar.cc/80" alt="Alex" class="avatar-image"><span class="avatar-fallback">AL</span>
+            </span>
+            <div class="sidebar-expanded-only footer-user-info">
+              <span class="user-name">Alex</span>
+              <span class="user-role">Admin</span>
+            </div>
+            <i data-lucide="chevron-up" class="sidebar-expanded-only chevron"></i>
+          </button>
+
+          <menu id="sidebar-footer-menu-sidebar-floating-icon" popover class="dropdown" data-placement="top-start" role="menu" style="position-anchor: --sidebar-footer-sidebar-floating-icon-anchor; width: anchor-size(width);">
+            <div class="menu-label">My Account</div>
+            <button class="menu-item" role="menuitem"><i data-lucide="user"></i>Profile</button>
+            <div class="menu-separator"></div>
+            <button class="menu-item menu-item-destructive" role="menuitem"><i data-lucide="log-out"></i>Log out</button>
+          </menu>
+        </footer>
+      </aside>
+
+      <div class="sidebar-inset">
+        <header class="topnav">
+          <button class="btn btn-ghost btn-icon-sm sidebar-trigger" aria-label="Toggle Sidebar" aria-controls="sidebar-floating-icon"><i data-lucide="arrow-left-to-line" class="sidebar-expanded-only" style="stroke-width: 1.5;"></i><i data-lucide="panel-left" class="sidebar-collapsed-only" style="stroke-width: 1.5;"></i></button>
+          <span style="font-size: 0.875rem; font-weight: 500;">Console</span>
+        </header>
+        <main>
+          <div style="padding: 1.5rem;">
+            <p style="color: var(--muted-foreground); font-size: 0.875rem;">Main content area.</p>
+          </div>
+        </main>
+      </div>
+    </div>
+</preview>
+
+<h3>Always Open</h3>
+<p class="section-meta">Cannot be collapsed.</p>
+<preview>
+    <div class="sidebar-provider" data-state="open" style="height: 460px; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden;">
+      <aside class="sidebar" id="sidebar-floating-none" role="navigation" data-variant="floating" data-collapsible="none">
+        <header class="sidebar-header">
+          <span class="sidebar-expanded-only" style="font-weight: 700; font-size: 1.1rem; letter-spacing: -0.02em;">Acme Corp</span>
+          <i data-lucide="command" class="sidebar-collapsed-only" style="width: 1.4rem; height: 1.4rem; color: var(--primary);"></i>
+        </header>
+
+        <nav class="sidebar-content">
+          <div class="sidebar-group-label"><span class="sidebar-expanded-only">Platform</span></div>
+          <ul class="sidebar-menu">
+            <li>
+              <a href="javascript:void(0)" class="sidebar-menu-button active" title="Dashboard">
+                <i data-lucide="layout-dashboard"></i>
+                <span class="sidebar-expanded-only">Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" class="sidebar-menu-button" title="Inbox">
+                <i data-lucide="inbox"></i>
+                <span class="sidebar-expanded-only">Inbox</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" class="sidebar-menu-button" title="Analytics">
+                <i data-lucide="bar-chart-2"></i>
+                <span class="sidebar-expanded-only">Analytics</span>
+              </a>
+            </li>
+            <li>
+              <details class="sidebar-group" open>
+                <summary class="sidebar-menu-button" title="Projects">
+                  <div class="summary-content">
+                    <i data-lucide="folder" class="sidebar-collapsed-only"></i>
+                    <i data-lucide="folder-open" class="sidebar-expanded-only"></i>
+                  </div>
+                  <span class="sidebar-expanded-only">Projects</span>
+                </summary>
+                <ul class="sidebar-menu sidebar-menu-sub">
+                  <li><a href="javascript:void(0)" class="sidebar-menu-button"><span class="sidebar-expanded-only">Frontend</span></a></li>
+                  <li><a href="javascript:void(0)" class="sidebar-menu-button"><span class="sidebar-expanded-only">Backend</span></a></li>
+                </ul>
+              </details>
+            </li>
+            <li>
+              <a href="javascript:void(0)" class="sidebar-menu-button" title="Settings">
+                <i data-lucide="settings"></i>
+                <span class="sidebar-expanded-only">Settings</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <footer class="sidebar-footer">
+          <button aria-haspopup="menu" popovertarget="sidebar-footer-menu-sidebar-floating-none" class="btn btn-ghost sidebar-footer-user" style="anchor-name: --sidebar-footer-sidebar-floating-none-anchor;" title="Profile">
+            <span class="avatar">
+              <img src="https://i.pravatar.cc/80" alt="Alex" class="avatar-image"><span class="avatar-fallback">AL</span>
+            </span>
+            <div class="sidebar-expanded-only footer-user-info">
+              <span class="user-name">Alex</span>
+              <span class="user-role">User</span>
+            </div>
+            <i data-lucide="chevron-up" class="sidebar-expanded-only chevron"></i>
+          </button>
+
+          <menu id="sidebar-footer-menu-sidebar-floating-none" popover class="dropdown" data-placement="top-start" role="menu" style="position-anchor: --sidebar-footer-sidebar-floating-none-anchor; width: anchor-size(width);">
+            <div class="menu-label">My Account</div>
+            <button class="menu-item" role="menuitem"><i data-lucide="user"></i>Profile</button>
+            <div class="menu-separator"></div>
+            <button class="menu-item menu-item-destructive" role="menuitem"><i data-lucide="log-out"></i>Log out</button>
+          </menu>
+        </footer>
+      </aside>
+
+      <div class="sidebar-inset">
+        <header class="topnav">
+          <span style="font-size: 0.875rem; font-weight: 500;">Dashboard</span>
+        </header>
+        <main>
+          <div style="padding: 1.5rem;">
+            <p style="color: var(--muted-foreground); font-size: 0.875rem;">Main content area.</p>
+          </div>
+        </main>
+      </div>
+    </div>
+</preview>
+
+<h2>Right Placement</h2>
+<hr style="margin: 1rem 0; border: 0; border-top: 1px solid var(--border);" />
+
+<h3>Offcanvas Mode</h3>
+<p class="section-meta">Disappears completely when collapsed.</p>
+<preview>
+    <div class="sidebar-provider" data-state="open" style="height: 460px; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden;">
+      <aside class="sidebar" id="sidebar-right-offcanvas" role="navigation" data-placement="right" data-collapsible="offcanvas">
+        <header class="sidebar-header">
+          <span class="sidebar-expanded-only" style="font-weight: 700; font-size: 1.1rem; letter-spacing: -0.02em;">Acme Corp</span>
+          <i data-lucide="command" class="sidebar-collapsed-only" style="width: 1.4rem; height: 1.4rem; color: var(--primary);"></i>
+        </header>
+
+        <nav class="sidebar-content">
+          <div class="sidebar-group-label"><span class="sidebar-expanded-only">Menu</span></div>
+          <ul class="sidebar-menu">
+            <li>
+              <a href="javascript:void(0)" class="sidebar-menu-button active" title="Dashboard">
+                <i data-lucide="layout-dashboard"></i>
+                <span class="sidebar-expanded-only">Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" class="sidebar-menu-button" title="Inbox">
+                <i data-lucide="inbox"></i>
+                <span class="sidebar-expanded-only">Inbox</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" class="sidebar-menu-button" title="Analytics">
+                <i data-lucide="bar-chart-2"></i>
+                <span class="sidebar-expanded-only">Analytics</span>
+              </a>
+            </li>
+            <li>
+              <details class="sidebar-group" open>
+                <summary class="sidebar-menu-button" title="Projects">
+                  <div class="summary-content">
+                    <i data-lucide="folder" class="sidebar-collapsed-only"></i>
+                    <i data-lucide="folder-open" class="sidebar-expanded-only"></i>
+                  </div>
+                  <span class="sidebar-expanded-only">Projects</span>
+                </summary>
+                <ul class="sidebar-menu sidebar-menu-sub">
+                  <li><a href="javascript:void(0)" class="sidebar-menu-button"><span class="sidebar-expanded-only">Frontend</span></a></li>
+                  <li><a href="javascript:void(0)" class="sidebar-menu-button"><span class="sidebar-expanded-only">Backend</span></a></li>
+                </ul>
+              </details>
+            </li>
+            <li>
+              <a href="javascript:void(0)" class="sidebar-menu-button" title="Settings">
+                <i data-lucide="settings"></i>
+                <span class="sidebar-expanded-only">Settings</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <footer class="sidebar-footer">
+          <button aria-haspopup="menu" popovertarget="sidebar-footer-menu-sidebar-right-offcanvas" class="btn btn-ghost sidebar-footer-user" style="anchor-name: --sidebar-footer-sidebar-right-offcanvas-anchor;" title="Profile">
+            <span class="avatar">
+              <img src="https://i.pravatar.cc/80" alt="Alex" class="avatar-image"><span class="avatar-fallback">AL</span>
+            </span>
+            <div class="sidebar-expanded-only footer-user-info">
+              <span class="user-name">Alex</span>
+              <span class="user-role">User</span>
+            </div>
+            <i data-lucide="chevron-up" class="sidebar-expanded-only chevron"></i>
+          </button>
+
+          <menu id="sidebar-footer-menu-sidebar-right-offcanvas" popover class="dropdown" data-placement="top-start" role="menu" style="position-anchor: --sidebar-footer-sidebar-right-offcanvas-anchor; width: anchor-size(width);">
+            <div class="menu-label">My Account</div>
+            <button class="menu-item" role="menuitem"><i data-lucide="user"></i>Profile</button>
+            <div class="menu-separator"></div>
+            <button class="menu-item menu-item-destructive" role="menuitem"><i data-lucide="log-out"></i>Log out</button>
+          </menu>
+        </footer>
+      </aside>
+
+      <div class="sidebar-inset">
+        <header class="topnav">
+          <span style="font-size: 0.875rem; font-weight: 500; flex: 1;">Console</span>
+          <button class="btn btn-ghost btn-icon-sm sidebar-trigger" aria-label="Toggle Sidebar" aria-controls="sidebar-right-offcanvas"><i data-lucide="panel-right" style="stroke-width: 1.5;"></i></button>
+        </header>
+        <main>
+          <div style="padding: 1.5rem;">
+            <p style="color: var(--muted-foreground); font-size: 0.875rem;">Main content area.</p>
+          </div>
+        </main>
+      </div>
+    </div>
+</preview>
+
+<h3>Icon Rail Mode</h3>
+<p class="section-meta">Shrinks to an icon-only rail.</p>
+<preview>
+    <div class="sidebar-provider" data-state="open" style="height: 460px; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden;">
+      <aside class="sidebar" id="sidebar-right-icon" role="navigation" data-placement="right" data-collapsible="icon">
+        <header class="sidebar-header">
+          <span class="sidebar-expanded-only" style="font-weight: 700; font-size: 1.1rem; letter-spacing: -0.02em;">Acme Corp</span>
+          <i data-lucide="command" class="sidebar-collapsed-only" style="width: 1.4rem; height: 1.4rem; color: var(--primary);"></i>
+        </header>
+
+        <nav class="sidebar-content">
+          <div class="sidebar-group-label"><span class="sidebar-expanded-only">Menu</span></div>
+          <ul class="sidebar-menu">
+            <li>
+              <a href="javascript:void(0)" class="sidebar-menu-button active" title="Dashboard">
+                <i data-lucide="layout-dashboard"></i>
+                <span class="sidebar-expanded-only">Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" class="sidebar-menu-button" title="Inbox">
+                <i data-lucide="inbox"></i>
+                <span class="sidebar-expanded-only">Inbox</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" class="sidebar-menu-button" title="Analytics">
+                <i data-lucide="bar-chart-2"></i>
+                <span class="sidebar-expanded-only">Analytics</span>
+              </a>
+            </li>
+            <li>
+              <details class="sidebar-group" open>
+                <summary class="sidebar-menu-button" title="Projects">
+                  <div class="summary-content">
+                    <i data-lucide="folder" class="sidebar-collapsed-only"></i>
+                    <i data-lucide="folder-open" class="sidebar-expanded-only"></i>
+                  </div>
+                  <span class="sidebar-expanded-only">Projects</span>
+                </summary>
+                <ul class="sidebar-menu sidebar-menu-sub">
+                  <li><a href="javascript:void(0)" class="sidebar-menu-button"><span class="sidebar-expanded-only">Frontend</span></a></li>
+                  <li><a href="javascript:void(0)" class="sidebar-menu-button"><span class="sidebar-expanded-only">Backend</span></a></li>
+                </ul>
+              </details>
+            </li>
+            <li>
+              <a href="javascript:void(0)" class="sidebar-menu-button" title="Settings">
+                <i data-lucide="settings"></i>
+                <span class="sidebar-expanded-only">Settings</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <footer class="sidebar-footer">
+          <button aria-haspopup="menu" popovertarget="sidebar-footer-menu-sidebar-right-icon" class="btn btn-ghost sidebar-footer-user" style="anchor-name: --sidebar-footer-sidebar-right-icon-anchor;" title="Profile">
+            <span class="avatar">
+              <img src="https://i.pravatar.cc/80" alt="Alex" class="avatar-image"><span class="avatar-fallback">AL</span>
+            </span>
+            <div class="sidebar-expanded-only footer-user-info">
+              <span class="user-name">Alex</span>
+              <span class="user-role">User</span>
+            </div>
+            <i data-lucide="chevron-up" class="sidebar-expanded-only chevron"></i>
+          </button>
+
+          <menu id="sidebar-footer-menu-sidebar-right-icon" popover class="dropdown" data-placement="top-start" role="menu" style="position-anchor: --sidebar-footer-sidebar-right-icon-anchor; width: anchor-size(width);">
+            <div class="menu-label">My Account</div>
+            <button class="menu-item" role="menuitem"><i data-lucide="user"></i>Profile</button>
+            <div class="menu-separator"></div>
+            <button class="menu-item menu-item-destructive" role="menuitem"><i data-lucide="log-out"></i>Log out</button>
+          </menu>
+        </footer>
+      </aside>
+
+      <div class="sidebar-inset">
+        <header class="topnav">
+          <span style="font-size: 0.875rem; font-weight: 500; flex: 1;">Console</span>
+          <button class="btn btn-ghost btn-icon-sm sidebar-trigger" aria-label="Toggle Sidebar" aria-controls="sidebar-right-icon"><i data-lucide="panel-right" style="stroke-width: 1.5;"></i></button>
+        </header>
+        <main>
+          <div style="padding: 1.5rem;">
+            <p style="color: var(--muted-foreground); font-size: 0.875rem;">Main content area.</p>
+          </div>
+        </main>
+      </div>
+    </div>
+</preview>
+
+<h3>Always Open</h3>
+<p class="section-meta">Cannot be collapsed.</p>
+<preview>
+    <div class="sidebar-provider" data-state="open" style="height: 460px; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden;">
+      <aside class="sidebar" id="sidebar-right-none" role="navigation" data-placement="right" data-collapsible="none">
+        <header class="sidebar-header">
+          <span class="sidebar-expanded-only" style="font-weight: 700; font-size: 1.1rem; letter-spacing: -0.02em;">Acme Corp</span>
+          <i data-lucide="command" class="sidebar-collapsed-only" style="width: 1.4rem; height: 1.4rem; color: var(--primary);"></i>
+        </header>
+
+        <nav class="sidebar-content">
+          <div class="sidebar-group-label"><span class="sidebar-expanded-only">Menu</span></div>
+          <ul class="sidebar-menu">
+            <li>
+              <a href="javascript:void(0)" class="sidebar-menu-button active" title="Dashboard">
+                <i data-lucide="layout-dashboard"></i>
+                <span class="sidebar-expanded-only">Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" class="sidebar-menu-button" title="Inbox">
+                <i data-lucide="inbox"></i>
+                <span class="sidebar-expanded-only">Inbox</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" class="sidebar-menu-button" title="Analytics">
+                <i data-lucide="bar-chart-2"></i>
+                <span class="sidebar-expanded-only">Analytics</span>
+              </a>
+            </li>
+            <li>
+              <details class="sidebar-group" open>
+                <summary class="sidebar-menu-button" title="Projects">
+                  <div class="summary-content">
+                    <i data-lucide="folder" class="sidebar-collapsed-only"></i>
+                    <i data-lucide="folder-open" class="sidebar-expanded-only"></i>
+                  </div>
+                  <span class="sidebar-expanded-only">Projects</span>
+                </summary>
+                <ul class="sidebar-menu sidebar-menu-sub">
+                  <li><a href="javascript:void(0)" class="sidebar-menu-button"><span class="sidebar-expanded-only">Frontend</span></a></li>
+                  <li><a href="javascript:void(0)" class="sidebar-menu-button"><span class="sidebar-expanded-only">Backend</span></a></li>
+                </ul>
+              </details>
+            </li>
+            <li>
+              <a href="javascript:void(0)" class="sidebar-menu-button" title="Settings">
+                <i data-lucide="settings"></i>
+                <span class="sidebar-expanded-only">Settings</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <footer class="sidebar-footer">
+          <button aria-haspopup="menu" popovertarget="sidebar-footer-menu-sidebar-right-none" class="btn btn-ghost sidebar-footer-user" style="anchor-name: --sidebar-footer-sidebar-right-none-anchor;" title="Profile">
+            <span class="avatar">
+              <img src="https://i.pravatar.cc/80" alt="Alex" class="avatar-image"><span class="avatar-fallback">AL</span>
+            </span>
+            <div class="sidebar-expanded-only footer-user-info">
+              <span class="user-name">Alex</span>
+              <span class="user-role">User</span>
+            </div>
+            <i data-lucide="chevron-up" class="sidebar-expanded-only chevron"></i>
+          </button>
+
+          <menu id="sidebar-footer-menu-sidebar-right-none" popover class="dropdown" data-placement="top-start" role="menu" style="position-anchor: --sidebar-footer-sidebar-right-none-anchor; width: anchor-size(width);">
+            <div class="menu-label">My Account</div>
+            <button class="menu-item" role="menuitem"><i data-lucide="user"></i>Profile</button>
+            <div class="menu-separator"></div>
+            <button class="menu-item menu-item-destructive" role="menuitem"><i data-lucide="log-out"></i>Log out</button>
+          </menu>
+        </footer>
+      </aside>
+
+      <div class="sidebar-inset">
+        <header class="topnav">
+          <span style="font-size: 0.875rem; font-weight: 500;">Dashboard</span>
+        </header>
+        <main>
+          <div style="padding: 1.5rem;">
+            <p style="color: var(--muted-foreground); font-size: 0.875rem;">Main content area.</p>
+          </div>
+        </main>
+      </div>
+    </div>
+</preview>

@@ -1,0 +1,135 @@
+@layer components {
+  .progress {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 0.5rem;
+    border: none;
+    border-radius: var(--radius-full);
+    background: var(--muted);
+    overflow: hidden;
+    vertical-align: middle;
+
+    &::-webkit-progress-bar {
+      background: var(--muted);
+      border-radius: var(--radius-full);
+    }
+
+    &::-webkit-progress-value {
+      background: var(--accent);
+      border-radius: 0;
+      transition: width 100ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    &::-moz-progress-bar {
+      background: var(--accent);
+      border-radius: 0;
+      transition: width 100ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    &.progress-success {
+      &::-webkit-progress-value { background: oklch(0.627 0.17 145); }
+      &::-moz-progress-bar { background: oklch(0.627 0.17 145); }
+    }
+    &.progress-warning {
+      &::-webkit-progress-value { background: oklch(0.75 0.15 80); }
+      &::-moz-progress-bar { background: oklch(0.75 0.15 80); }
+    }
+    &.progress-destructive {
+      &::-webkit-progress-value { background: var(--destructive); }
+      &::-moz-progress-bar { background: var(--destructive); }
+    }
+    &.progress-primary {
+      &::-webkit-progress-value { background: var(--primary); }
+      &::-moz-progress-bar { background: var(--primary); }
+    }
+
+    &:indeterminate {
+      background-color: var(--secondary);
+      background-image: linear-gradient(90deg,
+              transparent 0%,
+              var(--accent) 0%,
+              var(--accent) 100%,
+              transparent 100%);
+      background-size: 25% 100%;
+      background-repeat: no-repeat;
+      animation: progress-indeterminate 1s infinite linear;
+
+      &.progress-primary {
+        background-image: linear-gradient(90deg, transparent 0%, var(--primary) 0%, var(--primary) 100%, transparent 100%);
+      }
+      &.progress-success {
+        background-image: linear-gradient(90deg, transparent 0%, oklch(0.627 0.17 145) 0%, oklch(0.627 0.17 145) 100%, transparent 100%);
+      }
+
+      &::-webkit-progress-bar {
+        background: transparent;
+      }
+      &::-webkit-progress-value {
+        background: transparent;
+      }
+      &::-moz-progress-bar {
+        background: transparent;
+      }
+    }
+  }
+
+  @keyframes progress-indeterminate {
+    0% {
+      background-position: -30% 0;
+    }
+    100% {
+      background-position: 130% 0;
+    }
+  }
+
+  .meter {
+    appearance: none;
+    width: 100%;
+    height: 0.5rem;
+    border: none;
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    background: var(--muted);
+    vertical-align: middle;
+
+    &::-webkit-meter-bar {
+      background: var(--muted);
+      border: none;
+      border-radius: var(--radius-full);
+      height: 100%;
+    }
+
+    &::-webkit-meter-optimum-value,
+    &::-webkit-meter-suboptimum-value,
+    &::-webkit-meter-even-less-good-value {
+      border-radius: 0;
+      transition: width 100ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    &::-webkit-meter-optimum-value {
+      background: var(--success, oklch(0.627 0.17 145));
+    }
+
+    &::-webkit-meter-suboptimum-value {
+      background: var(--warning, oklch(0.75 0.15 80));
+    }
+
+    &::-webkit-meter-even-less-good-value {
+      background: var(--destructive);
+    }
+
+    &::-moz-meter-bar {
+      background: var(--success, oklch(0.627 0.17 145));
+      border-radius: 0;
+    }
+
+    &:-moz-meter-sub-optimum::-moz-meter-bar {
+      background: var(--warning, oklch(0.75 0.15 80));
+    }
+
+    &:-moz-meter-sub-sub-optimum::-moz-meter-bar {
+      background: var(--destructive);
+    }
+  }
+}

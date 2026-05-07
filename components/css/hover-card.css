@@ -1,0 +1,129 @@
+@layer components {
+  .hover-card-trigger {
+    position: relative;
+    display: inline-block;
+    z-index: auto;
+
+    @media (hover: hover) {
+      &:hover {
+        z-index: 200;
+
+        
+        & .hover-card-content {
+          opacity: 1;
+          visibility: visible;
+          pointer-events: auto;
+          transform: scale(1);
+        }
+      }
+    }
+
+    
+    @media (hover: none) {
+      &:focus-within {
+        z-index: 200;
+
+        & .hover-card-content {
+          opacity: 1;
+          visibility: visible;
+          pointer-events: auto;
+          transform: scale(1);
+        }
+      }
+    }
+  }
+
+  
+  
+  .hover-card-content {
+    position: fixed;
+    position-visibility: always;
+    z-index: 200;
+    width: 16rem;             
+    padding: 0.625rem;        
+    border-radius: calc(var(--radius) + 2px);  
+    background-color: var(--popover);
+    color: var(--popover-foreground);
+    font-size: 0.875rem;      
+    
+    box-shadow:
+      0 4px 6px -1px oklch(0 0 0 / 0.1),
+      0 2px 4px -2px oklch(0 0 0 / 0.1),
+      0 0 0 1px oklch(from var(--foreground) l c h / 0.1);
+    outline: none;
+
+    
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: scale(0.95);
+    transform-origin: top center;
+
+    
+    transition:
+      opacity 100ms cubic-bezier(0.4, 0, 0.2, 1),
+      transform 100ms cubic-bezier(0.4, 0, 0.2, 1),
+      visibility 100ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition-delay: 100ms;  
+
+    
+    &::after {
+      content: '';
+      position: absolute;
+      inset: -0.5rem;   
+      z-index: -1;
+    }
+
+    
+    &:hover,
+    &:focus-within {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: scale(1);
+    }
+
+    
+
+    
+    &[data-placement="bottom"],
+    &:not([data-placement]) {
+      top: anchor(bottom);
+      left: anchor(center);
+      translate: -50% 0;
+      margin-top: 0.25rem;   
+      transform-origin: top center;
+      position-try-fallbacks: flip-block;
+    }
+
+    
+    &[data-placement="top"] {
+      bottom: anchor(top);
+      left: anchor(center);
+      translate: -50% 0;
+      margin-bottom: 0.25rem;
+      transform-origin: bottom center;
+      position-try-fallbacks: flip-block;
+    }
+
+    
+    &[data-placement="right"] {
+      top: anchor(center);
+      left: anchor(right);
+      translate: 0 -50%;
+      margin-left: 0.25rem;
+      transform-origin: left center;
+      position-try-fallbacks: flip-inline;
+    }
+
+    
+    &[data-placement="left"] {
+      top: anchor(center);
+      right: anchor(left);
+      translate: 0 -50%;
+      margin-right: 0.25rem;
+      transform-origin: right center;
+      position-try-fallbacks: flip-inline;
+    }
+  }
+}

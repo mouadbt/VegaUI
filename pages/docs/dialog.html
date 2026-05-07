@@ -1,0 +1,97 @@
+<h2>Dialog</h2>
+<p class="section-meta">A window overlaid on either the primary window or another dialog window, rendering the content underneath inert.</p>
+
+<!-- Default — Edit Profile -->
+<preview>
+    <button class="btn btn-outline" commandfor="dlg-edit" command="show-modal">Edit Profile</button>
+    <dialog id="dlg-edit" class="dialog" style="max-width: 425px;" onclick="if(event.target===this)this.close()">
+        <header class="dialog-header">
+            <div style="display: flex; justify-content: space-between;">
+                <div style="display:grid; gap:0.375rem;">
+                    <h4 style="font-size:1.125rem;font-weight:600;line-height:1;margin:0;">Edit Profile</h4>
+                    <p style="font-size:0.875rem;color:var(--muted-foreground);margin:0;">Update your account information. Click save when done.</p>
+                </div>
+                <button class="btn btn-ghost btn-icon-sm" style="margin-top:-0.5rem; margin-right:-0.5rem;" commandfor="dlg-edit" command="close">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+        </header>
+        <div style="display:grid; gap:1.25rem;">
+            <div style="display:grid; gap:0.50rem;">
+                <label for="dlg-name" class="label">Display Name</label>
+                <input id="dlg-name" class="input" value="Alex">
+            </div>
+            <div style="display:grid; gap:0.50rem;">
+                <label for="dlg-email" class="label">Email Address</label>
+                <input id="dlg-email" class="input" value="alex@example.com">
+            </div>
+        </div>
+        <footer class="dialog-footer">
+            <button class="btn btn-outline" commandfor="dlg-edit" command="close">Cancel</button>
+            <button class="btn" commandfor="dlg-edit" command="close">Save Changes</button>
+        </footer>
+    </dialog>
+</preview>
+
+<!-- Alert Dialog — blocking, no click-outside-to-close -->
+<h3>Alert Dialog</h3>
+<preview>
+    <button class="btn btn-outline" commandfor="dlg-alert" command="show-modal">Delete Account</button>
+    <dialog id="dlg-alert" class="dialog" style="max-width: 425px;">
+        <header class="dialog-header">
+            <h4 style="font-size:1.125rem;font-weight:600;line-height:1.4;margin:0;">Are you absolutely sure?</h4>
+            <p style="font-size:0.875rem;color:var(--muted-foreground);margin:0;line-height:1.6;">This action cannot be undone. This will permanently delete your account and remove your data from our servers.</p>
+        </header>
+        <footer class="dialog-footer">
+            <button class="btn btn-outline" commandfor="dlg-alert" command="close">Cancel</button>
+            <button class="btn" commandfor="dlg-alert" command="close">Delete Account</button>
+        </footer>
+    </dialog>
+</preview>
+
+<!-- Destructive -->
+<h3>Destructive</h3>
+<preview>
+    <button class="btn btn-destructive" commandfor="dlg-del" command="show-modal">
+        <i data-lucide="trash-2"></i> Remove Project
+    </button>
+    <dialog id="dlg-del" class="dialog" style="max-width: 425px;">
+        <header class="dialog-header">
+            <h4 style="font-size:1.125rem;font-weight:600;line-height:1.4;margin:0;color:var(--destructive);">Remove Project</h4>
+            <p style="font-size:0.875rem;color:var(--muted-foreground);margin:0;">This will permanently remove the project and all associated files. This action is irreversible.</p>
+        </header>
+        <footer class="dialog-footer">
+            <button class="btn btn-outline" commandfor="dlg-del" command="close">Cancel</button>
+            <button class="btn btn-destructive" commandfor="dlg-del" command="close">Remove Project</button>
+        </footer>
+    </dialog>
+</preview>
+
+<!-- Scrollable content -->
+<h3>Scrollable Content</h3>
+<preview>
+    <button class="btn btn-outline" commandfor="dlg-scroll" command="show-modal">View Terms</button>
+    <dialog id="dlg-scroll" class="dialog" style="max-width: 600px;" onclick="if(event.target===this)this.close()">
+        <header class="dialog-header" autofocus tabindex="-1">
+            <h4 style="font-size:1.125rem;font-weight:600;line-height:1;margin:0;">Terms of Service</h4>
+            <p style="font-size:0.875rem;color:var(--muted-foreground);margin:0;">Please review our terms and conditions.</p>
+        </header>
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+            <h5 style="margin:0;font-size:1rem;font-weight:600;">1. General Usage</h5>
+            <p style="margin:0;font-size:0.875rem;line-height:1.6;">By accessing this platform, you agree to comply with all local laws and regulations. You are responsible for maintaining the confidentiality of your account information.</p>
+            
+            <h5 style="margin:0;font-size:1rem;font-weight:600;">2. Data Privacy</h5>
+            <p style="margin:0;font-size:0.875rem;line-height:1.6;">We value your privacy. Any data collected during your session is handled in accordance with our Privacy Policy. We do not sell your personal information to third parties.</p>
+
+            <h5 style="margin:0;font-size:1rem;font-weight:600;">3. Limitation of Liability</h5>
+            <p style="margin:0;font-size:0.875rem;line-height:1.6;">The platform is provided "as is" without any warranties. We shall not be liable for any direct, indirect, or incidental damages arising from your use of the service.</p>
+            
+            <h5 style="margin:0;font-size:1rem;font-weight:600;">4. Modifications</h5>
+            <p style="margin:0;font-size:0.875rem;line-height:1.6;">We reserve the right to modify these terms at any time. Continued use of the platform constitutes acceptance of the updated terms.</p>
+        </div>
+        <footer class="dialog-footer">
+            <button class="btn btn-outline" commandfor="dlg-scroll" command="close">Dismiss</button>
+            <button class="btn" commandfor="dlg-scroll" command="close">Acknowledge</button>
+        </footer>
+    </dialog>
+</preview>

@@ -1,0 +1,53 @@
+@layer components {
+  .input {
+    display: flex;
+    height: 2rem;
+    width: 100%;
+    min-width: 0;
+    border-radius: var(--radius);
+    border: 1px solid var(--input);
+    background-color: transparent;
+    padding-inline: 0.625rem;
+    padding-block: 0.25rem;
+    font-size: 1rem;
+    color: var(--foreground);
+    transition: color 100ms ease, background-color 100ms ease, border-color 100ms ease, opacity 100ms ease;
+    outline: none;
+
+    @media (min-width: 768px) {
+      font-size: 0.875rem;
+    }
+
+    &:focus-visible {
+      border-color: var(--ring);
+    }
+
+    &::placeholder {
+      color: var(--muted-foreground);
+    }
+
+    &:disabled {
+      pointer-events: none;
+      cursor: not-allowed;
+
+      background-color: color-mix(in oklch, var(--input) 50%, transparent);
+      opacity: 0.5;
+    }
+
+    &[aria-invalid="true"] {
+      border-color: var(--destructive);
+    }
+
+    .dark & {
+      background-color: color-mix(in oklch, var(--input) 20%, transparent);
+
+      &:disabled {
+        background-color: color-mix(in oklch, var(--input) 80%, transparent);
+      }
+
+      &[aria-invalid="true"] {
+        border-color: color-mix(in oklch, var(--destructive) 50%, transparent);
+      }
+    }
+}
+}

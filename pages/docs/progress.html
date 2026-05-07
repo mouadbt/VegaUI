@@ -1,0 +1,58 @@
+<h2>Progress</h2>
+<p class="section-meta">Displays an indicator showing the completion progress of a task, with support for various functional color states.</p>
+
+<h3>Default (Accent)</h3>
+<preview>
+    <div style="width: 100%; max-width: 400px; display: flex; flex-direction: column; gap: 0.5rem;">
+        <div style="display: flex; justify-content: space-between; font-size: 0.875rem;">
+            <span style="font-weight: 500;">Downloading Assets</span>
+            <span style="color: var(--muted-foreground);">60%</span>
+        </div>
+        <progress class="progress" value="60" max="100" style="width:100%;"></progress>
+    </div>
+</preview>
+
+<h3>Variants</h3>
+<preview style="flex-direction: column; gap: 2rem;">
+    <!-- Primary -->
+    <div style="width: 100%; max-width: 400px; display: flex; flex-direction: column; gap: 0.5rem;">
+        <div style="display: flex; justify-content: space-between; font-size: 0.875rem;">
+            <span style="font-weight: 500;">Indexing Files</span>
+            <span style="color: var(--muted-foreground);">75%</span>
+        </div>
+        <progress class="progress progress-primary" value="75" max="100" style="width:100%;"></progress>
+    </div>
+
+    <!-- Success -->
+    <div style="width: 100%; max-width: 400px; display: flex; flex-direction: column; gap: 0.5rem;">
+        <div style="display: flex; justify-content: space-between; font-size: 0.875rem;">
+            <span style="font-weight: 500;">Task Completed</span>
+            <span style="color: var(--muted-foreground);">100%</span>
+        </div>
+        <progress class="progress progress-success" value="100" max="100" style="width:100%;"></progress>
+    </div>
+
+    <!-- Warning -->
+    <div style="width: 100%; max-width: 400px; display: flex; flex-direction: column; gap: 0.5rem;">
+        <div style="display: flex; justify-content: space-between; font-size: 0.875rem;">
+            <span style="font-weight: 500;">Storage Usage</span>
+            <span style="color: var(--muted-foreground);">85%</span>
+        </div>
+        <progress class="progress progress-warning" value="85" max="100" style="width:100%;"></progress>
+    </div>
+
+    <!-- Destructive -->
+    <div style="width: 100%; max-width: 400px; display: flex; flex-direction: column; gap: 0.5rem;">
+        <div style="display: flex; justify-content: space-between; font-size: 0.875rem;">
+            <span style="font-weight: 500;">Memory Usage</span>
+            <span style="color: var(--muted-foreground);">98%</span>
+        </div>
+        <progress class="progress progress-destructive" value="98" max="100" style="width:100%;"></progress>
+    </div>
+</preview>
+
+<h3>Indeterminate</h3>
+<preview style="flex-direction: column; gap: 1.5rem;">
+    <progress class="progress" style="width: 100%; max-width: 400px;"></progress>
+    <progress class="progress progress-primary" style="width: 100%; max-width: 400px;"></progress>
+</preview>

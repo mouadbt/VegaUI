@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>//</title>
+    <link rel="stylesheet" href="../components/index.css">
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/katorlys/prism-theme-github/themes/prism-theme-github-light.css"
+        id="prism-theme"
+        data-light="https://cdn.jsdelivr.net/gh/katorlys/prism-theme-github/themes/prism-theme-github-light.css"
+        data-dark="https://cdn.jsdelivr.net/gh/katorlys/prism-theme-github/themes/prism-theme-github-dark.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root { --toc: 220px; }
+
+        .pages-header-actions {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .sidebar-trigger-btn { margin-right: 0.5rem; }
+
+        .pages-content-wrapper {
+            display: flex;
+            flex: 1;
+            min-height: 0;
+            position: relative;
+            overflow-y: auto;
+        }
+
+        .pages-main-content { flex: 1; min-width: 0; }
+
+        .pages-content { padding: 2rem 2.5rem 6rem; }
+
+        .pages-toc {
+            position: sticky;
+            top: 0;
+            width: var(--toc);
+            height: fit-content;
+            padding: 2rem 1.5rem;
+            display: none;
+            flex-shrink: 0;
+        }
+
+        .pages-toc-title {
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+            color: var(--muted-foreground);
+            font-weight: 500;
+        }
+
+        .pages-toc ul { list-style: none; padding: 0; margin: 0; }
+
+        .pages-toc a {
+            display: block;
+            font-size: 0.825rem;
+            color: var(--muted-foreground);
+            text-decoration: none;
+            padding: 0.35rem 0;
+            transition: color 0.15s;
+        }
+
+        .pages-toc a:is(:hover, :active) { color: var(--foreground); }
+
+        .pages-toc li[data-level="h3"] { padding-left: 1rem; }
+        .pages-toc li[data-level="h3"] a { font-size: 0.775rem; opacity: 0.8; }
+
+        .pages-section { margin-bottom: 5rem; }
+
+        .pages-content > h1 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+        }
+
+        :is(.pages-content, .pages-section) > h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.015em;
+            margin: 1.5rem 0 1rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
+        }
+
+        :is(.pages-content, .pages-section) > h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem;
+        }
+
+        :is(.pages-content, .pages-section) > p {
+            margin-bottom: 1.25rem;
+            color: var(--muted-foreground);
+            line-height: 1.7;
+        }
+
+        :is(.pages-content, .pages-section) > ul {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+            color: var(--muted-foreground);
+            line-height: 1.7;
+        }
+
+        :is(.pages-content, .pages-section) > ul li { margin-bottom: 0.35rem; }
+
+        :is(.pages-content, .pages-section) > :is(p, ul) code {
+            font-family: var(--font-mono);
+            font-size: 0.85em;
+            background: var(--muted);
+            padding: 0.15em 0.3em;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            color: var(--foreground);
+        }
+
+        :is(.pages-content, .pages-section) > .section-meta {
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+        }
+
+        :is(main, .pages-section) :is(h1, h2, h3) { scroll-margin-top: 2rem; }
+
+        .separator { margin: 1.5rem 0; }
+
+        .component-block {
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+
+        .component-block-header {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            border-bottom: 1px solid var(--border);
+            padding: 0.35rem 0.5rem;
+            background: var(--background);
+        }
+
+        .component-block-header .btn { margin-left: auto; }
+
+        .component-block-header.code-header:not(:first-child) { border-top: 1px solid var(--border); }
+
+        .code-header { border-bottom: none; }
+
+        .component-preview {
+            padding: 3rem 2.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            background: var(--background);
+        }
+
+        .component-preview.col { flex-direction: column; align-items: flex-start; }
+        .component-preview.start { justify-content: flex-start; }
+        .component-preview.gap-1-5 { gap: 0.375rem; }
+        .component-preview.max-w-sm > * { max-width: 320px; width: 100%; }
+        .component-preview.max-w-md > * { max-width: 380px; width: 100%; }
+
+        .code-pane {
+            max-height: 420px;
+            overflow-y: auto;
+            border-top: 1px solid var(--border);
+        }
+
+        pre[class*="language-"] {
+            margin: 0;
+            font-family: var(--font-mono);
+            font-size: 0.82rem;
+            background: var(--background);
+        }
+
+        code[class*="language-"] { background: transparent; text-shadow: none; }
+
+        preview { white-space: pre; display: none; }
+
+        /* Theme icon visibility */
+        .theme-show-dark { display: none; }
+        .theme-show-light { display: inline-flex; }
+        html.dark .theme-show-dark { display: inline-flex; }
+        html.dark .theme-show-light { display: none; }
+
+        @media (max-width: 1100px) {
+            .pages-toc { display: none !important; }
+            .pages-content { padding: 2rem 2rem 6rem; }
+        }
+
+        @media (max-width: 768px) {
+            .pages-content { padding: 1.5rem 1rem 4rem; }
+            .component-preview { padding: 1.5rem 1rem; }
+            .pages-content > h1 { font-size: 1.85rem; }
+            :is(.pages-content, .pages-section) > h2 { font-size: 1.4rem; }
+            :is(.pages-content, .pages-section) > h3 { font-size: 1.15rem; }
+            .code-pane pre[class*="language-"] { padding: 1rem; font-size: 0.75rem; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="sidebar-provider" data-state="open">
+        <aside class="sidebar pages-sidebar-aside" id="pages-sidebar" data-collapsible="icon" role="navigation">
+            <header class="sidebar-header"
+                style="display: flex; align-items: center; height: 3rem; overflow: hidden; padding: 0;">
+                <div style="width: 3rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                    <span
+                        style="font-weight: 700; font-size: 1.2rem; letter-spacing: -0.02em; color: var(--foreground);">//</span>
+                </div>
+            </header>
+            <nav id="main-sidebar" class="sidebar-content">
+                <div class="sidebar-group">
+                    <div class="sidebar-group-label"><span class="sidebar-expanded-only">Getting Started</span></div>
+                    <ul class="sidebar-menu">
+                        <li><a class="sidebar-menu-button" href="#pages"><i data-lucide="file-text"></i><span class="sidebar-expanded-only">Documentation</span></a></li>
+                        <li><a class="sidebar-menu-button" href="#installation"><i data-lucide="download"></i><span class="sidebar-expanded-only">Installation</span></a></li>
+                        <li><a class="sidebar-menu-button" href="#theming"><i data-lucide="swatch-book"></i><span class="sidebar-expanded-only">Theming</span></a></li>
+                    </ul>
+                </div>
+                <div class="sidebar-group">
+                    <div class="sidebar-group-label"><span class="sidebar-expanded-only">Components</span></div>
+                    <ul class="sidebar-menu">
+                        <li><a class="sidebar-menu-button" href="#accordion"><i data-lucide="package"></i><span class="sidebar-expanded-only">Accordion</span></a></li>
+                        <li><a class="sidebar-menu-button" href="#avatar"><i data-lucide="package"></i><span class="sidebar-expanded-only">Avatar</span></a></li>
+                        <li><a class="sidebar-menu-button" href="#badge"><i data-lucide="package"></i><span class="sidebar-expanded-only">Badge</span></a></li>
+                        <li><a class="sidebar-menu-button" href="#breadcrumb"><i data-lucide="package"></i><span class="sidebar-expanded-only">Breadcrumb</span></a></li>
+                        <li><a class="sidebar-menu-button" href="#button"><i data-lucide="package"></i><span class="sidebar-expanded-only">Button</span></a></li>
+                        <li><a class="sidebar-menu-button" href="#button-group"><i data-lucide="package"></i><span class="sidebar-expanded-only">Button Group</span></a></li>
+                        <li><a class="sidebar-menu-button" href="#card"><i data-lucide="package"></i><span class="sidebar-expanded-only">Card</span></a></li>
+                        <li><a class="sidebar-menu-button" href="#checkbox"><i data-lucide="package"></i><span class="sidebar-expanded-only">Checkbox</span></a></li>
+                        <li><a class="sidebar-menu-button" href="#combobox"><i data-lucide="package"></i><span class="sidebar-expanded-only">Combobox</span></a></li>
+                        <li><a class="sidebar-menu-button" href="#dialog"><i data-lucide="package"></i><span class="sidebar-expanded-only">Dialog</span></a></li>
+                        <li><a class="sidebar-menu-button" href="#dropdown"><i data-lucide="package"></i><span class="sidebar-expanded-only">Dropdown</span></a></li>
+                        <li><a class="sidebar-menu-button" href="#hover-card"><i data-lucide="package"></i><span class="sidebar-expanded-only">Hover Card</span></a></li>
+                        <li><a class="sidebar-menu-button" href="#input"><i data-lucide="package"></i><span class="sidebar-expanded-only">Input</span></a></li>
+                        <li><a class="sidebar-menu-button" href="#input-group"><i data-lucide="package"></i><span class="sidebar-expanded-only">Input Group</span></a></li>
+                        <li><a class="sidebar-menu-button" href="#kbd"><i data-lucide="package"></i><span class="sidebar-expanded-only">Kbd</span></a></li>
+                        <li><a class="sidebar-menu-button" href="#label"><i data-lucide="package"></i><span class="sidebar-expanded-only">Label</span></a></li>
+                        <li><a class="sidebar-menu-button" href="#pagination"><i data-lucide="package"></i><span class="sidebar-expanded-only">Pagination</span></a></li>
+                        <li><a class="sidebar-menu-button" href="#popover"><i data-lucide="package"></i><span class="sidebar-expanded-only">Popover</span></a></li>
+                        <li><a class="sidebar-menu-button" href="#progress"><i data-lucide="package"></i><span class="sidebar-expanded-only">Progress</span></a></li>
+                        <li><a class="sidebar-menu-button" href="#radio-group"><i data-lucide="package"></i><span class="sidebar-expanded-only">Radio Group</span></a></li>
+                        <li><a class="sidebar-menu-button" href="#select"><i data-lucide="package"></i><span class="sidebar-expanded-only">Select</span></a></li>
+                        <li><a class="sidebar-menu-button" href="#separator"><i data-lucide="package"></i><span class="sidebar-expanded-only">Separator</span></a></li>
+                        <li><a class="sidebar-menu-button" href="#sheet"><i data-lucide="package"></i><span class="sidebar-expanded-only">Sheet</span></a></li>
+                        <li><a class="sidebar-menu-button" href="#sidebar"><i data-lucide="package"></i><span class="sidebar-expanded-only">Sidebar</span></a></li>
+                        <li><a class="sidebar-menu-button" href="#skeleton"><i data-lucide="package"></i><span class="sidebar-expanded-only">Skeleton</span></a></li>
+                        <li><a class="sidebar-menu-button" href="#slider"><i data-lucide="package"></i><span class="sidebar-expanded-only">Slider</span></a></li>
+                        <li><a class="sidebar-menu-button" href="#spinner"><i data-lucide="package"></i><span class="sidebar-expanded-only">Spinner</span></a></li>
+                        <li><a class="sidebar-menu-button" href="#switch"><i data-lucide="package"></i><span class="sidebar-expanded-only">Switch</span></a></li>
+                        <li><a class="sidebar-menu-button" href="#table"><i data-lucide="package"></i><span class="sidebar-expanded-only">Table</span></a></li>
+                        <li><a class="sidebar-menu-button" href="#tabs"><i data-lucide="package"></i><span class="sidebar-expanded-only">Tabs</span></a></li>
+                        <li><a class="sidebar-menu-button" href="#textarea"><i data-lucide="package"></i><span class="sidebar-expanded-only">Textarea</span></a></li>
+                        <li><a class="sidebar-menu-button" href="#toast"><i data-lucide="package"></i><span class="sidebar-expanded-only">Toast</span></a></li>
+                        <li><a class="sidebar-menu-button" href="#toggle"><i data-lucide="package"></i><span class="sidebar-expanded-only">Toggle</span></a></li>
+                        <li><a class="sidebar-menu-button" href="#toggle-group"><i data-lucide="package"></i><span class="sidebar-expanded-only">Toggle Group</span></a></li>
+                        <li><a class="sidebar-menu-button" href="#tooltip"><i data-lucide="package"></i><span class="sidebar-expanded-only">Tooltip</span></a></li>
+                    </ul>
+                </div>
+            </nav>
+            <footer class="sidebar-footer">
+                <div class="card sidebar-expanded-only"
+                    style="padding: 0.75rem; gap: 0.25rem; margin-top: auto; width: 100%;">
+                    <div style="display: flex; flex-direction: column; gap: 0.25rem;">
+                        <span
+                            style="font-size: 0.65rem; opacity: 0.6; font-family: var(--font-mono); line-height: 1;">Beta v0.0.0</span>
+                        <p
+                            style="margin: 0; font-size: 0.75rem; font-weight: 500; color: var(--foreground); line-height: 1.2;">
+                            The UI Foundation</p>
+                    </div>
+                </div>
+                <div class="sidebar-collapsed-only" style="align-items: center; justify-content: center; width: 100%;">
+                </div>
+            </footer>
+        </aside>
+
+        <div class="sidebar-inset">
+            <header class="topnav">
+                <button class="sidebar-trigger btn btn-ghost btn-icon-sm sidebar-trigger-btn"
+                    aria-label="Toggle Sidebar" aria-controls="pages-sidebar">
+                    <i data-lucide="arrow-left-to-line" class="sidebar-expanded-only" style="stroke-width: 1.5;"></i>
+                    <i data-lucide="panel-left" class="sidebar-collapsed-only" style="stroke-width: 1.5;"></i>
+                </button>
+                <div class="pages-header-actions">
+                    <button class="btn btn-ghost btn-icon-sm theme-toggle" aria-pressed="false"
+                        aria-label="Toggle dark mode">
+                        <i data-lucide="moon" class="theme-show-light"></i>
+                        <i data-lucide="sun" class="theme-show-dark"></i>
+                    </button>
+                </div>
+            </header>
+
+            <div class="pages-content-wrapper">
+                <div class="pages-main-content">
+                    <main class="pages-content"></main>
+                </div>
+                <aside class="pages-toc">
+                    <div class="pages-toc-title">On This Page</div>
+                    <nav id="toc-nav"></nav>
+                </aside>
+            </div>
+        </div>
+    </div>
+
+    <template id="pages-content-template">
+
+        <h1>Components</h1>
+        <p class="section-meta">A comprehensive collection of zero-dependency components built entirely on standard web platform APIs. No build tools, no frameworks, no setup ceremony.</p>
+
+        <hr class="separator">
+
+        <h2>Design principles</h2>
+        <p style="color: var(--foreground); line-height: 1.8; margin-bottom: 2.5rem; white-space: pre-line;">
+            ✓ <strong>Native-first</strong> — built on standard semantics
+            ✓ <strong>Zero dependencies</strong> — no npm packages, no external runtimes, no CDN requirements
+            ✓ <strong>Framework-agnostic</strong> — integrates with React, Vue, Svelte, plain HTML, or anything
+            ✓ <strong>Accessible by default</strong> — keyboard navigation, focus trapping, and ARIA handled
+            automatically
+            ✓ <strong>Modern CSS</strong> — Cascade Layers keep specificity predictable; OKLCH design tokens for
+            perceptually uniform theming
+            ✓ <strong>Auto-initialising</strong> — interactive components activate on the first user interaction via
+            global event delegation; no per-element setup required
+        </p>
+
+    </template>
+
+    <template id="installation-content-template">
+        <div class="pages-section">
+            <h2>Integration</h2>
+            <p class="section-meta">Add a stylesheet and a script to your page — the library initialises everything
+                automatically with zero configuration required.</p>
+
+            <h3>1. Stylesheet</h3>
+            <p>Link the core stylesheet in your <code>&lt;head&gt;</code>. It uses Cascade Layers to ensure predictably
+                low specificity and easy overrides.</p>
+            <pre data-label="HTML"><code class="language-html">&lt;link rel="stylesheet" href="path/to/index.css"&gt;</code></pre>
+
+            <h3>2. Script</h3>
+            <p>Load the library script anywhere on your page. It registers global listeners for all components via event delegation.</p>
+            <pre data-label="HTML"><code class="language-html">&lt;script type="module" src="path/to/index.js"&gt;&lt;/script&gt;</code></pre>
+
+
+        </div>
+    </template>
+
+    <template id="theming-content-template">
+        <div class="pages-section">
+            <h2>Theming</h2>
+            <p>The library is built on a robust system of design tokens and modern CSS features. Nearly every visual aspect is controlled by CSS variables, making it effortlessly customisable for any brand or project.</p>
+
+            <h3>Design Tokens</h3>
+            <p>All core visual properties are defined as tokens in the root stylesheet using OKLCH for perceptually
+                uniform color palettes. Override these in your local stylesheet to change the look and feel.</p>
+            <pre><code class="language-css">:root {
+  --primary: oklch(0.205 0 0);
+  --radius: 0.25rem;
+  --spacing: 0.25rem;
+  --font-sans: "Geist", "Inter", sans-serif;
+  ...
+}</code></pre>
+
+            <h3>Dark Mode</h3>
+            <p>Dark mode support is built-in. Simply apply the <code>.dark</code> class to the <code>&lt;html&gt;</code>
+                element to activate the dark color palette. The system automatically handles color inversion based on
+                these tokens.</p>
+            <pre><code class="language-html">&lt;html class="dark"&gt;...&lt;/html&gt;</code></pre>
+
+            <h3>Theme Visibility</h3>
+            <p>Show or hide elements based on the active theme using simple utility classes.</p>
+
+            <pre><code class="language-html">&lt;span class="dark:hidden"&gt;Visible in light mode&lt;/span&gt;
+&lt;span class="hidden dark:block"&gt;Visible in dark mode&lt;/span&gt;</code></pre>
+
+            <h3>Theme Change Event</h3>
+            <p>Whenever the theme changes, the library dispatches a <code>theme:change</code> CustomEvent on the <code>document</code>. You can listen to this event to manually update things like syntax highlighters or dynamic images.</p>
+
+            <pre><code class="language-javascript">document.addEventListener('theme:change', (e) => {
+    const isDark = e.detail.isDark;
+    const activeThemeName = e.detail.theme; // 'light', 'dark', or 'system'
+    
+    // Example: Swapping an image source manually
+    const logo = document.getElementById('logo');
+    logo.src = isDark ? 'logo-dark.png' : 'logo-light.png';
+});</code></pre>
+
+            <h3>JavaScript Helpers</h3>
+            <p>Utility functions are provided to programmatically manage themes. These handle state persistence and
+                system preference synchronization automatically.</p>
+            <pre><code class="language-javascript">import { setTheme, switchTheme } from '../components/index.js';
+
+switchTheme(); // Switches between light and dark
+setTheme('dark'); // Forces a specific theme
+setTheme('system'); // Syncs with OS preference</code></pre>
+        </div>
+    </template>
+
+    <script type="module">
+        import '../components/index.js';
+
+        // Utilities
+        const dedent = text => { const l = text.split('\n').filter(s => s.trim()); const m = Math.min(...l.map(s => s.match(/^\s*/)[0].length)); return l.map(s => s.slice(m)).join('\n').trim(); };
+
+        const COPY_BTN = `<button class="btn btn-ghost btn-icon-xs" aria-label="Copy code" onclick="copyCode(this)"><i data-lucide="copy" class="icon-copy"></i><i data-lucide="check-check" class="icon-check" style="display:none"></i></button>`;
+
+        window.copyCode = btn => {
+            navigator.clipboard.writeText(btn.nextElementSibling.textContent);
+            const [copy, check] = [btn.querySelector('.icon-copy'), btn.querySelector('.icon-check')];
+            copy.style.display = 'none'; check.style.display = '';
+            setTimeout(() => { copy.style.display = ''; check.style.display = 'none'; }, 2000);
+        };
+
+        const codeBlock = (preview, raw, className = '') => `<div class="component-block">
+            ${preview ? `<div class="component-preview ${className}">${preview}</div>` : ''}
+            <div class="component-block-header code-header">
+                <span class="label">Code</span>${COPY_BTN}
+                <script type="text/plain" style="display:none">${raw}<\/script>
+            </div>
+            <div class="code-pane"><pre><code class="language-html">${raw.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</code></pre></div>
+        </div>`;
+
+        // Router
+        const content = document.querySelector('.pages-content');
+        const toc = document.getElementById('toc-nav');
+
+        async function loadPage() {
+            const hash = location.hash.slice(1) || 'pages';
+            document.querySelector('.pages-content-wrapper')?.scrollTo({ top: 0 });
+
+            const template = document.getElementById(`${hash}-content-template`);
+            if (template) {
+                content.innerHTML = template.innerHTML;
+            } else {
+                try {
+                    const res = await fetch(`docs/${hash}.html`);
+                    content.innerHTML = res.ok ? await res.text() : '<h2>404 — Not Found</h2>';
+                } catch {
+                    content.innerHTML = '<h2>Error loading page.</h2>';
+                }
+            }
+
+            // <preview> → live preview + code block
+            content.querySelectorAll('preview').forEach(el => {
+                el.outerHTML = codeBlock(el.innerHTML, dedent(el.innerHTML), el.className);
+            });
+
+            // standalone <pre> → copy-wrapped code block
+            content.querySelectorAll('pre:not(.component-block pre)').forEach(pre => {
+                const label = pre.getAttribute('data-label') || 'Code';
+                const wrapper = document.createElement('div');
+                wrapper.className = 'component-block';
+                wrapper.innerHTML = `<div class="component-block-header code-header"><span class="label">${label}</span>${COPY_BTN}<script type="text/plain" style="display:none">${pre.textContent}<\/script></div><div class="code-pane"></div>`;
+                wrapper.querySelector('.code-pane').appendChild(pre.cloneNode(true));
+                pre.replaceWith(wrapper);
+            });
+
+            // Table of contents
+            const headings = [...content.querySelectorAll('h2,h3')].filter(h => !h.closest('.component-preview'));
+            headings.forEach((h, i) => { if (!h.id) h.id = `section-${i}`; });
+            toc.innerHTML = headings.length
+                ? `<ul>${headings.map(h => `<li data-level="${h.tagName.toLowerCase()}"><a class="toc-link" href="#${h.id}">${h.textContent}</a></li>`).join('')}</ul>`
+                : '';
+            document.querySelector('.pages-toc').style.display = headings.length ? 'block' : 'none';
+
+            // ToC smooth scroll (single delegated listener)
+            toc.onclick = e => {
+                const link = e.target.closest('.toc-link');
+                if (!link) return;
+                e.preventDefault();
+                document.getElementById(link.hash.slice(1))?.scrollIntoView({ behavior: 'smooth' });
+            };
+
+            // Active sidebar link
+            document.querySelectorAll('.sidebar-menu-button').forEach(l =>
+                l.classList.toggle('active', l.getAttribute('href') === `#${hash}`));
+
+            window.lucide?.createIcons({ root: content });
+            window.Prism?.highlightAll();
+        }
+
+        window.addEventListener('hashchange', loadPage);
+        loadPage();
+        window.lucide?.createIcons();
+        
+        // Handle theme changes for syntax highlighting
+        document.addEventListener('theme:change', e => {
+            const isDark = e.detail.isDark;
+            const themeLink = document.getElementById('prism-theme');
+            if (themeLink) {
+                themeLink.href = isDark ? themeLink.getAttribute('data-dark') : themeLink.getAttribute('data-light');
+            }
+        });
+        
+        // Set initial highlighting theme
+        setTimeout(() => {
+            const isDark = document.documentElement.classList.contains('dark');
+            const themeLink = document.getElementById('prism-theme');
+            if (themeLink) {
+                themeLink.href = isDark ? themeLink.getAttribute('data-dark') : themeLink.getAttribute('data-light');
+            }
+        }, 0);
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+</body>
+
+</html>

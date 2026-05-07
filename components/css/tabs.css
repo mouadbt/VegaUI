@@ -1,0 +1,98 @@
+@layer components {
+  .tabs {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spacing) * 2);
+
+    &:has(> .tabs-list[aria-orientation="vertical"]) {
+      flex-direction: row;
+    }
+  }
+
+  .tabs-list {
+    display: inline-flex;
+    padding: 3px;
+    background: var(--muted);
+    border-radius: var(--radius);
+    gap: 0;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted-foreground);
+    width: fit-content;
+
+    .tabs:not(:has(> .tabs-list[aria-orientation="vertical"])) & {
+      height: 2rem;
+    }
+
+    &[aria-orientation="vertical"] {
+      flex-direction: column;
+      height: fit-content;
+    }
+  }
+
+  .tabs-trigger {
+    position: relative;
+    height: calc(100% - 1px);
+    flex: 1;
+    padding: 0.125rem calc(var(--spacing) * 1.5);
+    border: 1px solid transparent;
+    border-radius: calc(var(--radius) - 2px);
+    background: transparent;
+    font: inherit;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: oklch(from var(--foreground) l c h / 0.8);
+    cursor: default;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: calc(var(--spacing) * 1.5);
+    outline: none;
+    transition: all 100ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    @media (hover: hover) {
+      &:not([disabled]):hover {
+        color: var(--foreground);
+      }
+    }
+    &:not([disabled]):active {
+      color: var(--foreground);
+    }
+
+    &:focus-visible {
+      border-color: var(--ring);
+      outline: none;
+    }
+
+    .tabs-list[aria-orientation="vertical"] & {
+      width: 100%;
+      justify-content: flex-start;
+    }
+
+    &[disabled] {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    &[aria-selected="true"] {
+      background: var(--background);
+      color: var(--foreground);
+
+      @media (prefers-color-scheme: dark) {
+        border-color: var(--input);
+        background: color-mix(in oklch, var(--input) 50%, transparent);
+      }
+    }
+  }
+
+  .tabs-content {
+    flex: 1;
+    font-size: 0.875rem;
+    outline: none;
+
+    &[hidden] {
+      display: none;
+    }
+  }
+}

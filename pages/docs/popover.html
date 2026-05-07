@@ -1,0 +1,106 @@
+<h2>Popover</h2>
+<p class="section-meta">Floating panel anchored to a trigger using native Popover and CSS Anchor Positioning APIs.</p>
+
+<h3>Basic</h3>
+<preview style="padding: 4rem 1rem;">
+    <button popovertarget="p-basic" class="btn btn-outline" style="anchor-name: --a-basic;">View Profile</button>
+    <div id="p-basic" popover class="popover" data-placement="bottom-start" style="position-anchor: --a-basic;">
+        <p style="margin:0;">Profile updated successfully.</p>
+    </div>
+</preview>
+
+<h3>With Form</h3>
+<p class="section-meta">Popovers can contain complex forms and structured content.</p>
+<preview style="padding: 4rem 1rem;">
+    <button popovertarget="p-form" class="btn btn-outline" style="anchor-name: --a-form;">
+        Quick Settings
+    </button>
+    <div id="p-form" popover class="popover" data-placement="bottom-start" style="position-anchor: --a-form;">
+        <header class="popover-header">
+            <h4 class="popover-title">Dimensions</h4>
+            <p class="popover-description">Set the default size for your project.</p>
+        </header>
+        <div style="height: 1px; background: var(--border); margin: 0 -0.625rem;"></div>
+        <div style="display: grid; gap: 0.75rem; padding-top: 0.25rem;">
+            <div style="align-items: center; gap: 1rem;">
+                <label class="label">Width (px)</label>
+                <input class="input" type="number" value="1200">
+            </div>
+            <div style="align-items: center; gap: 1rem;">
+                <label class="label">Height (px)</label>
+                <input class="input" type="number" value="800">
+            </div>
+            <div style="align-items: center; gap: 1rem;">
+                <label class="label">Padding</label>
+                <input class="input" value="20px">
+            </div>
+        </div>
+        <div style="margin-top: 0.75rem;">
+             <button class="btn btn-sm btn-primary" style="width: 100%;">Apply</button>
+        </div>
+    </div>
+</preview>
+
+<h3>Placements</h3>
+<p class="section-meta">Use the <code>data-placement</code> attribute to dictate explicit edge and placement pinning.</p>
+<preview style="gap: 1rem;">
+    <button popovertarget="p-ts" class="btn btn-secondary btn-sm" style="anchor-name: --a-ts;">Top-Start</button>
+    <div id="p-ts" popover class="popover" data-placement="top-start" style="position-anchor: --a-ts; width: auto;">
+        <div class="popover-title">Top-start</div>
+    </div>
+
+    <button popovertarget="p-t" class="btn btn-secondary btn-sm" style="anchor-name: --a-t;">Top</button>
+    <div id="p-t" popover class="popover" data-placement="top" style="position-anchor: --a-t; width: auto;">
+        <div class="popover-title">Top</div>
+    </div>
+
+    <button popovertarget="p-te" class="btn btn-secondary btn-sm" style="anchor-name: --a-te;">Top-End</button>
+    <div id="p-te" popover class="popover" data-placement="top-end" style="position-anchor: --a-te; width: auto;">
+        <div class="popover-title">Top-end</div>
+    </div>
+
+    <button popovertarget="p-bs" class="btn btn-secondary btn-sm" style="anchor-name: --a-bs;">Bottom-Start</button>
+    <div id="p-bs" popover class="popover" data-placement="bottom-start" style="position-anchor: --a-bs; width: auto;">
+        <div class="popover-title">Bottom-start</div>
+    </div>
+
+    <button popovertarget="p-b" class="btn btn-secondary btn-sm" style="anchor-name: --a-b;">Bottom</button>
+    <div id="p-b" popover class="popover" data-placement="bottom" style="position-anchor: --a-b; width: auto;">
+        <div class="popover-title">Bottom</div>
+    </div>
+
+    <button popovertarget="p-be" class="btn btn-secondary btn-sm" style="anchor-name: --a-be;">Bottom-End</button>
+    <div id="p-be" popover class="popover" data-placement="bottom-end" style="position-anchor: --a-be; width: auto;">
+        <div class="popover-title">Bottom-end</div>
+    </div>
+
+    <button popovertarget="p-ls" class="btn btn-secondary btn-sm" style="anchor-name: --a-ls;">Left-Start</button>
+    <div id="p-ls" popover class="popover" data-placement="left-start" style="position-anchor: --a-ls; width: auto;">
+        <div class="popover-title">Left-start</div>
+    </div>
+
+    <button popovertarget="p-l" class="btn btn-secondary btn-sm" style="anchor-name: --a-l;">Left</button>
+    <div id="p-l" popover class="popover" data-placement="left" style="position-anchor: --a-l; width: auto;">
+        <div class="popover-title">Left</div>
+    </div>
+
+    <button popovertarget="p-le" class="btn btn-secondary btn-sm" style="anchor-name: --a-le;">Left-End</button>
+    <div id="p-le" popover class="popover" data-placement="left-end" style="position-anchor: --a-le; width: auto;">
+        <div class="popover-title">Left-end</div>
+    </div>
+
+    <button popovertarget="p-rs" class="btn btn-secondary btn-sm" style="anchor-name: --a-rs;">Right-Start</button>
+    <div id="p-rs" popover class="popover" data-placement="right-start" style="position-anchor: --a-rs; width: auto;">
+        <div class="popover-title">Right-start</div>
+    </div>
+
+    <button popovertarget="p-r" class="btn btn-secondary btn-sm" style="anchor-name: --a-r;">Right</button>
+    <div id="p-r" popover class="popover" data-placement="right" style="position-anchor: --a-r; width: auto;">
+        <div class="popover-title">Right</div>
+    </div>
+
+    <button popovertarget="p-re" class="btn btn-secondary btn-sm" style="anchor-name: --a-re;">Right-End</button>
+    <div id="p-re" popover class="popover" data-placement="right-end" style="position-anchor: --a-re; width: auto;">
+        <div class="popover-title">Right-end</div>
+    </div>
+</preview>
